@@ -159,7 +159,7 @@ async def transfer_premium(client, message):
                 f"👤 **From:** {sender_user.mention}\n"
                 f"👤 **To:** {new_user.mention}\n"
                 f"⏳ **Expiry Date:** {expiry_str_in_ist}\n\n"
-                f"__Powered by Team SPY__ 🚀"
+                f"Bot By: @MisterBrutal 🚀"
             )
             
             # Notification to the new user
