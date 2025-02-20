@@ -204,7 +204,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             if chat in saved_channel_ids:
                 await app.edit_message_text(
                     message.chat.id, edit_id,
-                    "Sorry! This channel is protected by **__Team SPY__**."
+                    "Sorry! This channel is protected by **@MisterBrutal**."
                 )
                 return
             
@@ -613,7 +613,7 @@ async def send_settings_message(chat_id, user_id):
         [Button.inline("Set Thumbnail", b'setthumb'), Button.inline("Remove Thumbnail", b'remthumb')],
         [Button.inline("PDF Wtmrk", b'pdfwt'), Button.inline("Video Wtmrk", b'watermark')],
         [Button.inline("Upload Method", b'uploadmethod')],  # Include the dynamic Fast DL button
-        [Button.url("Report Errors", "https://t.me/team_spy_pro")]
+        [Button.url("Report Errors", "https://t.me/Ig_1Venom")]
     ]
 
     await gf.send_file(
@@ -667,7 +667,7 @@ async def callback_query_handler(event):
         await event.respond('Please send the photo you want to set as the thumbnail.')
     
     elif event.data == b'pdfwt':
-        await event.respond("Watermark is Pro+ Plan.. contact @kingofpatal")
+        await event.respond("Watermark is Pro+ Plan.. contact @Ig_1Venom")
         return
 
     elif event.data == b'uploadmethod':
