@@ -108,8 +108,7 @@ help_pages = [
         "> 3. CAPTION : To add custom caption\n"
         "> 4. REPLACEWORDS : Can be used for words in deleted set via REMOVE WORDS\n"
         "> 5. RESET : To set the things back to default\n\n"
-        "> You can set CUSTOM THUMBNAIL, PDF WATERMARK, VIDEO WATERMARK, SESSION-based login, etc. from settings\n\n"
-        "**__Powered by Team SPY__**"
+        "> You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings\n\n"
     )
 ]
  
@@ -175,15 +174,15 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 async def terms(client, message):
     terms_text = (
         "> 📜 **Terms and Conditions** 📜\n\n"
-        "** → Wᴇ ᴀʀᴇ ɴᴏᴛ ʀᴇsᴘᴏɴsɪʙʟᴇ ғᴏʀ ᴜsᴇʀ ᴅᴇᴇᴅs, ᴀɴᴅ ᴡᴇ ᴅᴏ ɴᴏᴛ ᴘʀᴏᴍᴏᴛᴇ ᴄᴏᴘʏʀɪɢʜᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ. Iғ ᴀɴʏ ᴜsᴇʀ ᴇɴɢᴀɢᴇs ɪɴ sᴜᴄʜ ᴀᴄᴛɪᴠɪᴛɪᴇs, ᴛʜᴇɴ ʜᴇ/sʜᴇ ɪs sᴏʟᴇʟʏ ʀᴇsᴘᴏɴsɪʙʟᴇ**"
-        "** → Uᴘᴏɴ ᴘᴜʀᴄʜᴀsᴇ, ᴡᴇ ᴅᴏ ɴᴏᴛ ɢᴜᴀʀᴀɴᴛᴇᴇ ᴛʜᴇ ᴜᴘᴛɪᴍᴇ, ᴅᴏᴡɴᴛɪᴍᴇ, Oғ Bᴏᴛ **"
+        "** → Wᴇ ᴀʀᴇ ɴᴏᴛ ʀᴇsᴘᴏɴsɪʙʟᴇ ғᴏʀ ᴜsᴇʀ ᴅᴇᴇᴅs, ᴀɴᴅ ᴡᴇ ᴅᴏ ɴᴏᴛ ᴘʀᴏᴍᴏᴛᴇ ᴄᴏᴘʏʀɪɢʜᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ. Iғ ᴀɴʏ ᴜsᴇʀ ᴇɴɢᴀɢᴇs ɪɴ sᴜᴄʜ ᴀᴄᴛɪᴠɪᴛɪᴇs, ᴛʜᴇɴ ʜᴇ/sʜᴇ ɪs sᴏʟᴇʟʏ ʀᴇsᴘᴏɴsɪʙʟᴇ \n\n**"
+        "** → Uᴘᴏɴ ᴘᴜʀᴄʜᴀsᴇ, ᴡᴇ ᴅᴏ ɴᴏᴛ ɢᴜᴀʀᴀɴᴛᴇᴇ ᴛʜᴇ ᴜᴘᴛɪᴍᴇ, ᴅᴏᴡɴᴛɪᴍᴇ, Oғ Bᴏᴛ \n\n **"
         "** → Aᴜᴛʜᴏʀɪᴢᴀᴛɪᴏɴ ᴀɴᴅ ʙᴀɴɴɪɴɢ ᴏғ ᴜsᴇʀs ᴀʀᴇ ᴀᴛ ᴏᴜʀ ᴅɪsᴄʀᴇᴛɪᴏɴ; ᴡᴇ ʀᴇsᴇʀᴠᴇ ᴛʜᴇ ʀɪɢʜᴛ ᴛᴏ ʙᴀɴ ᴏʀ ᴀᴜᴛʜᴏʀɪᴢᴇ ᴜsᴇʀs ᴀᴛ ᴀɴʏ ᴛɪᴍᴇ ** "
         
     )
      
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📋 See Plans", callback_data="see_plan")],
+            [InlineKeyboardButton("Purchase Premium", callback_data="see_plan")],
             [InlineKeyboardButton("💬 Contact Now", url="https://t.me/Ig_1Venom")],
         ]
     )
@@ -210,7 +209,7 @@ async def plan(client, message):
 **‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.**
 **‼️ ɢɪᴠᴇ ᴜꜱ ꜱᴏᴍᴇᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴘʀᴇᴍɪᴜᴍ ʟɪꜱᴛ.**
 
-     📜 **Terms and Conditions**: For Further Details Read Complete Terms and Conditions, Send /terms or click See Terms👇"""
+     📜 **Terms And Conditions Applied**"""
     )
      
     buttons = InlineKeyboardMarkup(
@@ -242,7 +241,7 @@ async def see_plan(client, callback_query):
 **‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.**
 **‼️ ɢɪᴠᴇ ᴜꜱ ꜱᴏᴍᴇᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴘʀᴇᴍɪᴜᴍ ʟɪꜱᴛ.**
 
-     📜 **Terms and Conditions**: For Further Details Read Complete Terms and Conditions, Send /terms or click See Terms👇"""
+     📜 **Terms And Conditions Applied** """
 
     )
      
@@ -259,8 +258,8 @@ async def see_plan(client, callback_query):
 async def see_terms(client, callback_query):
     terms_text = (
      "> 📜 **Terms and Conditions** 📜\n\n"
-        "** → Wᴇ ᴀʀᴇ ɴᴏᴛ ʀᴇsᴘᴏɴsɪʙʟᴇ ғᴏʀ ᴜsᴇʀ ᴅᴇᴇᴅs, ᴀɴᴅ ᴡᴇ ᴅᴏ ɴᴏᴛ ᴘʀᴏᴍᴏᴛᴇ ᴄᴏᴘʏʀɪɢʜᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ. Iғ ᴀɴʏ ᴜsᴇʀ ᴇɴɢᴀɢᴇs ɪɴ sᴜᴄʜ ᴀᴄᴛɪᴠɪᴛɪᴇs, ᴛʜᴇɴ ʜᴇ/sʜᴇ ɪs sᴏʟᴇʟʏ ʀᴇsᴘᴏɴsɪʙʟᴇ**"
-        "** → Uᴘᴏɴ ᴘᴜʀᴄʜᴀsᴇ, ᴡᴇ ᴅᴏ ɴᴏᴛ ɢᴜᴀʀᴀɴᴛᴇᴇ ᴛʜᴇ ᴜᴘᴛɪᴍᴇ, ᴅᴏᴡɴᴛɪᴍᴇ, Oғ Bᴏᴛ **"
+        "** → Wᴇ ᴀʀᴇ ɴᴏᴛ ʀᴇsᴘᴏɴsɪʙʟᴇ ғᴏʀ ᴜsᴇʀ ᴅᴇᴇᴅs, ᴀɴᴅ ᴡᴇ ᴅᴏ ɴᴏᴛ ᴘʀᴏᴍᴏᴛᴇ ᴄᴏᴘʏʀɪɢʜᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ. Iғ ᴀɴʏ ᴜsᴇʀ ᴇɴɢᴀɢᴇs ɪɴ sᴜᴄʜ ᴀᴄᴛɪᴠɪᴛɪᴇs, ᴛʜᴇɴ ʜᴇ/sʜᴇ ɪs sᴏʟᴇʟʏ ʀᴇsᴘᴏɴsɪʙʟᴇ \n\n**"
+        "** → Uᴘᴏɴ ᴘᴜʀᴄʜᴀsᴇ, ᴡᴇ ᴅᴏ ɴᴏᴛ ɢᴜᴀʀᴀɴᴛᴇᴇ ᴛʜᴇ ᴜᴘᴛɪᴍᴇ, ᴅᴏᴡɴᴛɪᴍᴇ, Oғ Bᴏᴛ \n\n **"
         "** → Aᴜᴛʜᴏʀɪᴢᴀᴛɪᴏɴ ᴀɴᴅ ʙᴀɴɴɪɴɢ ᴏғ ᴜsᴇʀs ᴀʀᴇ ᴀᴛ ᴏᴜʀ ᴅɪsᴄʀᴇᴛɪᴏɴ; ᴡᴇ ʀᴇsᴇʀᴠᴇ ᴛʜᴇ ʀɪɢʜᴛ ᴛᴏ ʙᴀɴ ᴏʀ ᴀᴜᴛʜᴏʀɪᴢᴇ ᴜsᴇʀs ᴀᴛ ᴀɴʏ ᴛɪᴍᴇ **"
            
      
@@ -268,7 +267,7 @@ async def see_terms(client, callback_query):
      
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📋 See Plans", callback_data="see_plan")],
+            [InlineKeyboardButton("Buy Premium", callback_data="see_plan")],
             [InlineKeyboardButton("💬 Contact Admin", url="https://t.me/IG_1Venom")],
         ]
     )
