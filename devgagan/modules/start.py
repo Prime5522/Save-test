@@ -64,12 +64,11 @@ async def set(_, message):
  
 help_pages = [
     (
-        "📝 **Read Bot Commands & Features (1/2)**:\n\n"
-       """** This is a very Powerful And Advanced Content Saver Bot
-       Using This Bot Can You Save Content from The Pivate Or Pubic Channels and Groups Where Copying and forwarding Is off
-
-       For Public Channels You Can Directly Send the Link of Message You want to save.
-       But for Private Channels You'll Have to Login Your Telegram Account (Make Sure to Logout from The Bot After Your Job is Done)**
+        "📝 **Read Bot Commands & Features **:\n\n"
+       """** This is a very Powerful And Advanced Content Saver Bot\n\n
+       Using This Bot Can You Save Content from The Pivate Or Pubic Channels and Groups Where Copying and forwarding Is off\n
+      → For Public Channels You Can Just Send Me The link.
+      → But for Private Channels You'll Have to Login Your Telegram Account (Make Sure to Logout from The Bot After Your Job is Done)\n**
 """       
         "1. **/batch**\n"
         "> Bulk extraction for posts (After login)\n\n"
