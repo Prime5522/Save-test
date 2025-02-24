@@ -611,8 +611,7 @@ async def send_settings_message(chat_id, user_id):
         [Button.inline("Remove Words", b'delete'), Button.inline("Reset", b'reset')],
         [Button.inline("Session Login", b'addsession'), Button.inline("Logout", b'logout')],
         [Button.inline("Set Thumbnail", b'setthumb'), Button.inline("Remove Thumbnail", b'remthumb')],
-        [Button.inline("Upload Method", b'uploadmethod')],  # Include the dynamic Fast DL button
-        [Button.url("Report Errors", "https://t.me/Ig_1Venom")]
+        [Button.inline("Upload Method", b'uploadmethod')]  # Include the dynamic Fast upload
     ]
 
     await gf.send_file(
