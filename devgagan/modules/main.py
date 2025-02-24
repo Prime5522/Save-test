@@ -56,7 +56,7 @@ async def check_interval(user_id, freecheck):
         cooldown_end = interval_set[user_id]
         if now < cooldown_end:
             remaining_time = (cooldown_end - now).seconds
-            return False, f"Please wait {remaining_time} seconds(s) before sending another link. Alternatively, purchase premium for instant access.\n\n> Hey 👋 You can use /token to use the bot free for 3 hours without any time limit."
+            return False, f"Please wait {remaining_time} seconds(s) before sending another link. Alternatively, purchase premium for instant access.\n\n> Hey 👋 You can use /token to use the bot free for 6 hours without any time limit."
         else:
             del interval_set[user_id]  # Cooldown expired, remove user from interval set
 
@@ -137,7 +137,7 @@ async def initialize_userbot(user_id): # this ensure the single startup .. even 
             await userbot.start()
             return userbot
         except Exception:
-            await app.send_message(user_id, "Login Expired re do login")
+            await app.send_message(user_id, "Login Expired Please login Again")
             return None
     else:
         if DEFAULT_SESSION:
@@ -223,11 +223,11 @@ async def batch_link(_, message):
         await message.reply(response_message)
         return
         
-    join_button = InlineKeyboardButton("Join Channel", url="https://t.me/team_spy_pro")
+    join_button = InlineKeyboardButton("Join Channel", url="https://t.me/MisterBrutal")
     keyboard = InlineKeyboardMarkup([[join_button]])
     pin_msg = await app.send_message(
         user_id,
-        f"Batch process started ⚡\nProcessing: 0/{cl}\n\n**Powered by Team SPY**",
+        f"Batch process started ⚡\nProcessing: 0/{cl}\n\n**Bot By @MisterBrutal**",
         reply_markup=keyboard
     )
     await pin_msg.pin(both_sides=True)
@@ -246,14 +246,14 @@ async def batch_link(_, message):
                     msg = await app.send_message(message.chat.id, f"Processing...")
                     await process_and_upload_link(userbot, user_id, msg.id, link, 0, message)
                     await pin_msg.edit_text(
-                        f"Batch process started ⚡\nProcessing: {i - cs + 1}/{cl}\n\n**__Powered by Team SPY__**",
+                        f"Batch process started ⚡\nProcessing: {i - cs + 1}/{cl}\n\n**Bot By @MisterBrutal**",
                         reply_markup=keyboard
                     )
                     normal_links_handled = True
         if normal_links_handled:
             await set_interval(user_id, interval_minutes=300)
             await pin_msg.edit_text(
-                f"Batch completed successfully for {cl} messages 🎉\n\n**__Powered by Team SPY__**",
+                f"Batch completed successfully for {cl} messages 🎉\n\n**Bot By @MisterBrutal**",
                 reply_markup=keyboard
             )
             await app.send_message(message.chat.id, "Batch completed successfully! 🎉")
@@ -272,13 +272,13 @@ async def batch_link(_, message):
                     msg = await app.send_message(message.chat.id, f"Processing...")
                     await process_and_upload_link(userbot, user_id, msg.id, link, 0, message)
                     await pin_msg.edit_text(
-                        f"Batch process started ⚡\nProcessing: {i - cs + 1}/{cl}\n\n**__Powered by Team SPY__**",
+                        f"Batch process started ⚡\nProcessing: {i - cs + 1}/{cl}\n\n**Bot By @MisterBrutal**",
                         reply_markup=keyboard
                     )
 
         await set_interval(user_id, interval_minutes=300)
         await pin_msg.edit_text(
-            f"Batch completed successfully for {cl} messages 🎉\n\n**__Powered by Team SPY__**",
+            f"Batch completed successfully for {cl} messages 🎉\n\n**Bot By @MisterBrutal**",
             reply_markup=keyboard
         )
         await app.send_message(message.chat.id, "Batch completed successfully! 🎉")
