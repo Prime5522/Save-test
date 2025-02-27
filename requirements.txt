@@ -14,7 +14,7 @@ flask
 aiohttp
 telethon
 aiojobs
-werkzeug==2.2.2
+werkzeug
 apscheduler 
 telethon-tgcrypto
 mutagen
