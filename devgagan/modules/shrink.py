@@ -70,7 +70,7 @@ async def token_handler(client, message):
     if join == 1:
         return
     chat_id = "MisterBrutal"
-    msg = await app.get_messages(chat_id, )
+    msg = await app.get_messages(chat_id, 42 )
     user_id = message.chat.id
     if len(message.command) <= 1:
         image_url = "https://envs.sh/Fgv.jpg"
