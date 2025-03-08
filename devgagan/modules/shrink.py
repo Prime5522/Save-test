@@ -107,10 +107,10 @@ async def token_handler(client, message):
                 "user_id": user_id,
                 "param": param,
                 "created_at": datetime.utcnow(),
-                "expires_at": datetime.utcnow() + timedelta(hours=8),
+                "expires_at": datetime.utcnow() + timedelta(hours=20),
             })
             del Param[user_id]   
-            await message.reply("✅ You have been verified successfully! Enjoy your session for next 8 hours.")
+            await message.reply("✅ You have been verified successfully! Enjoy your session for next 20 hours.")
             return
         else:
             await message.reply("❌ Invalid or expired verification link. Please generate a new token.")
@@ -144,5 +144,5 @@ async def smart_handler(client, message):
         button = InlineKeyboardMarkup(
             [[InlineKeyboardButton("Verify the token now...", url=shortened_url)]]
         )
-        await message.reply("Click the button below to verify your free access token: \n\n> What will you get ? \n1. No time bound upto 8 hours \n2. Batch command limit will be FreeLimit + 20 \n3. All functions unlocked", reply_markup=button)
+        await message.reply("Click the button below to verify your free access token: \n\n> What will you get ? \n1. No time bound upto 20 hours \n2. Batch command limit will be FreeLimit + 20 \n3. All functions unlocked", reply_markup=button)
  
