@@ -17,7 +17,7 @@ import time , re
 from pyrogram import enums
 from config import CHANNEL_ID, OWNER_ID 
 from devgagan.core.mongo.plans_db import premium_users
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 import cv2
 from pyrogram.errors import FloodWait, InviteHashInvalid, InviteHashExpired, UserAlreadyParticipant, UserNotParticipant
 from datetime import datetime as dt
@@ -33,21 +33,49 @@ async def gen_link(app,chat_id):
    return link
 
 async def subscribe(app, message):
-   update_channel = CHANNEL_ID
-   url = await gen_link(app, update_channel)
-   if update_channel:
-      try:
-         user = await app.get_chat_member(update_channel, message.from_user.id)
-         if user.status == "kicked":
-            await message.reply_text("You are Banned. Contact -- @Ig_1Venom")
+    update_channel = CHANNEL_ID
+    url = await gen_link(app, update_channel)
+    
+    if update_channel:
+        try:
+            user = await app.get_chat_member(update_channel, message.from_user.id)
+            if user.status == "kicked":
+                await message.reply_text("You are Banned. Contact -- @Prime_Bots_Support_RoBot")
+                return 1
+        except UserNotParticipant:
+            caption = (
+                "📢 **Iғ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴜꜱᴇ ᴍᴇ, ғɪʀꜱᴛ ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴏᴜʀ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ.**\n\n"
+                "➜ **ғɪʀꜱᴛ, ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ '✇ Jᴏɪɴ Oᴜʀ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇' ʙᴜᴛᴛᴏɴ.**\n"
+                "➜ **ᴛʜᴇɴ, ᴄʟɪᴄᴋ ᴏɴ 'ʀᴇǫᴜᴇꜱᴛ ᴛᴏ Jᴏɪɴ' ʙᴜᴛᴛᴏɴ.**\n"
+                "➜ **ᴀғᴛᴇʀ ᴛʜᴀᴛ, ʀᴇᴛᴜʀɴ ʜᴇʀᴇ ᴀɴᴅ ᴘʀᴇꜱꜱ '🔄 Rᴇғʀᴇꜱʜ' ʙᴜᴛᴛᴏɴ.**\n\n"
+                "📌 **Oɴᴄᴇ ʏᴏᴜ ᴊᴏɪɴ, ʏᴏᴜ ᴄᴀɴ ꜱᴇɴᴅ ʏᴏᴜʀ ғɪʟᴇ.**"
+            )
+            buttons = [
+                [InlineKeyboardButton("✇ Jᴏɪɴ Oᴜʀ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇", url=f"{url}")],
+                [InlineKeyboardButton("🔄 Rᴇғʀᴇꜱʜ", callback_data="refresh_subscription")]
+            ]
+            await message.reply_photo(
+                photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
+                caption=caption,
+                reply_markup=InlineKeyboardMarkup(buttons)
+            )
             return 1
-      except UserNotParticipant:
-        caption = f"Join our channel to use the bot"
-        await message.reply_photo(photo="https://graph.org/file/d44f024a08ded19452152.jpg",caption=caption, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Join Now...", url=f"{url}")]]))
-        return 1
-      except Exception:
-         await message.reply_text("Something Went Wrong. Contact us @IG_1Venom")
-         return 1
+        except Exception:
+            await message.reply_text("Something Went Wrong. Contact us @Prime_Bots_Support_RoBot")
+            return 1
+
+async def refresh_subscription(client, callback_query: CallbackQuery):
+    update_channel = CHANNEL_ID
+    try:
+        user = await client.get_chat_member(update_channel, callback_query.from_user.id)
+        if user.status in ["member", "administrator", "creator"]:
+            await callback_query.message.delete()
+            await callback_query.message.reply_text("✅ **Tʜᴀɴᴋ ʏᴏᴜ ғᴏʀ ᴊᴏɪɴɪɴɢ ᴏᴜʀ ᴄʜᴀɴɴᴇʟ!**\n\n🎉 **Nᴏᴡ ʏᴏᴜ ᴄᴀɴ ꜱᴇɴᴅ ʏᴏᴜʀ ғɪʟᴇ & Link.**")
+        else:
+            await callback_query.answer("⚠️ Yᴏᴜ ʜᴀᴠᴇɴ'ᴛ ᴊᴏɪɴᴇᴅ ʏᴇᴛ! Pʟᴇᴀsᴇ ᴊᴏɪɴ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ.", show_alert=True)
+    except Exception:
+        await callback_query.answer("⚠️ Sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ! Pʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.", show_alert=True)
+        
 async def get_seconds(time_string):
     def extract_value_and_unit(ts):
         value = ""
@@ -250,7 +278,7 @@ async def progress_callback(current, total, progress_message):
     f"│ **__Progress:__** {percent:.2f}%\n"
     f"│ **__Uploaded:__** {current_mb:.2f} MB / {total_mb:.2f} MB\n"
     f"╰──────────────────╯\n\n"
-    f"**Bot By: @MisterBrutal**"
+    f"**Bot By: @Prime_Botz**"
         )
 
         last_update_time = current_time
