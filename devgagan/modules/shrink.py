@@ -62,34 +62,26 @@ async def is_user_verified(user_id):
     session = await token.find_one({"user_id": user_id})
     return session is not None
  
- 
-@app.on_message(filters.command("start"))
+ @app.on_message(filters.command("start"))
 async def token_handler(client, message):
-    """Handle the /start command."""
+    """Handle the /token command."""
     join = await subscribe(client, message)
     if join == 1:
         return
-    
-    chat_id = "Prime_Botz"
-    msg = await app.get_messages(chat_id, 42)
-
-    # NoneType AttributeError ফিক্স করার জন্য চেক
-    if msg and msg.photo:
-        photo_id = msg.photo.file_id
-    else:
-        photo_id = "https://i.postimg.cc/SQVw7HCz/photo-2025-03-17-09-39-48-7482710873702662152.jpg"  # ডিফল্ট ইমেজ URL
-    
+    chat_id = "MisterBrutal"
+    msg = await app.get_messages(chat_id, 42 )
     user_id = message.chat.id
     if len(message.command) <= 1:
-        join_button = InlineKeyboardButton("Join Channel", url="https://t.me/Prime_Botz")
-        premium = InlineKeyboardButton("Get Premium", url="https://t.me/Prime_Admin_Support_ProBot")   
+        image_url = "https://envs.sh/Fgv.jpg"
+        join_button = InlineKeyboardButton("Join Channel", url="https://t.me/MisterBrutal")
+        premium = InlineKeyboardButton("Get Premium", url="https://t.me/Ig_1Venom")   
         keyboard = InlineKeyboardMarkup([
             [join_button],   
             [premium]    
         ])
          
         await message.reply_photo(
-            photo_id,  # NoneType সমস্যা ফিক্স
+            msg.photo.file_id,
             caption=(
                 "**Hi 👋 Welcome**\n\n"
                 "**✳️ I can save posts from Channels or Groups where forwarding is off.**\n"
@@ -99,7 +91,6 @@ async def token_handler(client, message):
             reply_markup=keyboard
         )
         return
- 
     param = message.command[1] if len(message.command) > 1 else None
     freecheck = await chk_user(message, user_id)
     if freecheck != 1:
