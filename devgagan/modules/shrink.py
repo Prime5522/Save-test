@@ -62,7 +62,7 @@ async def is_user_verified(user_id):
     session = await token.find_one({"user_id": user_id})
     return session is not None
  
- @app.on_message(filters.command("start"))
+@app.on_message(filters.command("start"))
 async def token_handler(client, message):
     """Handle the /token command."""
     join = await subscribe(client, message)
