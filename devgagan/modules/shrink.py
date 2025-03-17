@@ -74,9 +74,10 @@ async def is_user_verified(user_id):
     session = await token.find_one({"user_id": user_id})
     return session is not None
  
+
 @app.on_message(filters.command("start"))
 async def token_handler(client, message):
-   if AUTH_CHANNEL:
+    if AUTH_CHANNEL:
         try:
             btn = await is_subscribed(client, message, AUTH_CHANNEL)
             if btn:
@@ -87,34 +88,39 @@ async def token_handler(client, message):
                     btn.append([InlineKeyboardButton("♻️ Try Again ♻️", url=f"https://t.me/{username}?start=true")])
 
                 await message.reply_photo(
-                    photo="https://envs.sh/KgA.jpg",  # Replace with your image link
+                    photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",  # Replace with your image link
                     caption=(
-                        "<b>👋 Hello {message.from_user.mention},\n\n"
-                        "ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴜꜱᴇ ᴍᴇ, ʏᴏᴜ ᴍᴜꜱᴛ ꜰɪʀꜱᴛ ᴊᴏɪɴ ᴏᴜʀ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ. "
-                        "ᴄʟɪᴄᴋ ᴏɴ \"✇ ᴊᴏɪɴ ᴏᴜʀ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ ✇\" ʙᴜᴛᴛᴏɴ.ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ \"ʀᴇǫᴜᴇꜱᴛ ᴛᴏ ᴊᴏɪɴ\" ʙᴜᴛᴛᴏɴ. "
-                        "ᴀꜰᴛᴇʀ ᴊᴏɪɴɪɴɢ, ᴄʟɪᴄᴋ ᴏɴ \"ᴛʀʏ ᴀɢᴀɪɴ\" ʙᴜᴛᴛᴏɴ.</b>"
+                        f"<b>👋 Hello {message.from_user.mention},\n\n"
+                        "If you want to use me, you must first join our updates channel. "
+                        "Click on \"✇ Join Our Updates Channel ✇\" button. Then click on the \"Request to Join\" button. "
+                        "After joining, click on \"Try Again\" button.</b>"
                     ),
                     reply_markup=InlineKeyboardMarkup(btn)
                 )
-                return
+                return  # ✅ Return added here to stop further execution if not subscribed
         except Exception as e:
             print(e)
-    """Handle the /token command."""
+            return  # ✅ Return added to prevent further execution in case of exception
+
+    # ✅ Handle the /start command when user is subscribed
     join = await subscribe(client, message)
     if join == 1:
-        return
+        return  # ✅ Return added here if user is not subscribed
+    
     chat_id = "Prime_Botz"
-    msg = await app.get_messages(chat_id, 42 )
+    msg = await client.get_messages(chat_id, 42)
+    
     user_id = message.chat.id
     if len(message.command) <= 1:
         image_url = "https://envs.sh/Fgv.jpg"
         join_button = InlineKeyboardButton("Join Channel", url="https://t.me/Prime_Botz")
-        premium = InlineKeyboardButton("Get Premium", url="https://t.me/Ig_1Venom")   
+        premium = InlineKeyboardButton("Get Premium", url="https://t.me/Ig_1Venom")
+        
         keyboard = InlineKeyboardMarkup([
             [join_button],   
             [premium]    
         ])
-         
+        
         await message.reply_photo(
             msg.photo.file_id,
             caption=(
@@ -125,7 +131,7 @@ async def token_handler(client, message):
             ),
             reply_markup=keyboard
         )
-        return
+        return  # ✅ Return added at the end to ensure proper flow
     param = message.command[1] if len(message.command) > 1 else None
     freecheck = await chk_user(message, user_id)
     if freecheck != 1:
