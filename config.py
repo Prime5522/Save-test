@@ -1,7 +1,11 @@
-# devgagan
-# Note if you are trying to deploy on vps then directly fill values in ("")
-
+import re
 from os import getenv
+
+id_pattern = re.compile(r'^.\d+$')
+
+AUTH_CHANNEL = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('AUTH_CHANNEL', '-1002245813234').split()] 
+# give channel id with separate space. Ex: ('-10073828 -102782829 -1007282828')
+
 
 # VPS --- FILL COOKIES 🍪 in """ ... """ 
 
