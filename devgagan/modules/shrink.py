@@ -65,15 +65,22 @@ async def is_user_verified(user_id):
  
 @app.on_message(filters.command("start"))
 async def token_handler(client, message):
-    """Handle the /token command."""
+    """Handle the /start command."""
     join = await subscribe(client, message)
     if join == 1:
         return
+    
     chat_id = "Prime_Botz"
-    msg = await app.get_messages(chat_id, 42 )
+    msg = await app.get_messages(chat_id, 42)
+
+    # NoneType AttributeError ফিক্স করার জন্য চেক
+    if msg and msg.photo:
+        photo_id = msg.photo.file_id
+    else:
+        photo_id = "https://i.ibb.co/yFbqM7V/photo-2025-03-17-05-48-38-7482651302506266628.jpg"  # ডিফল্ট ইমেজ URL
+    
     user_id = message.chat.id
     if len(message.command) <= 1:
-        image_url = "https://i.ibb.co/yFbqM7Vx/photo-2025-03-17-05-48-38-7482651302506266628.jpg"
         join_button = InlineKeyboardButton("Join Channel", url="https://t.me/Prime_Botz")
         premium = InlineKeyboardButton("Get Premium", url="https://t.me/Prime_Admin_Support_ProBot")   
         keyboard = InlineKeyboardMarkup([
@@ -82,7 +89,7 @@ async def token_handler(client, message):
         ])
          
         await message.reply_photo(
-            msg.photo.file_id,
+            photo_id,  # NoneType সমস্যা ফিক্স
             caption=(
                 "**Hi 👋 Welcome**\n\n"
                 "**✳️ I can save posts from Channels or Groups where forwarding is off.**\n"
@@ -91,7 +98,7 @@ async def token_handler(client, message):
             ),
             reply_markup=keyboard
         )
-        return  
+        return
  
     param = message.command[1] if len(message.command) > 1 else None
     freecheck = await chk_user(message, user_id)
