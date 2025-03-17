@@ -52,7 +52,7 @@ async def subscribe(app, message):
             )
             buttons = [
                 [InlineKeyboardButton("✇ Jᴏɪɴ Oᴜʀ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ ✇", url=f"{url}")],
-                [InlineKeyboardButton("🔄 Rᴇғʀᴇꜱʜ", callback_data="refresh_subscription")]
+                [InlineKeyboardButton("🔄 Rᴇғʀᴇꜱʜ", url=f"https://t.me/Save_Restricted_Content_PrimeBot?start=start")]
             ]
             await message.reply_photo(
                 photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
@@ -64,17 +64,17 @@ async def subscribe(app, message):
             await message.reply_text("Something Went Wrong. Contact us @Prime_Bots_Support_RoBot")
             return 1
 
-async def refresh_subscription(client, callback_query: CallbackQuery):
-    update_channel = CHANNEL_ID
-    try:
-        user = await client.get_chat_member(update_channel, callback_query.from_user.id)
-        if user.status in ["member", "administrator", "creator"]:
-            await callback_query.message.delete()
-            await callback_query.message.reply_text("✅ **Tʜᴀɴᴋ ʏᴏᴜ ғᴏʀ ᴊᴏɪɴɪɴɢ ᴏᴜʀ ᴄʜᴀɴɴᴇʟ!**\n\n🎉 **Nᴏᴡ ʏᴏᴜ ᴄᴀɴ ꜱᴇɴᴅ ʏᴏᴜʀ ғɪʟᴇ & ʟɪɴᴋꜱ.**")
-        else:
-            await callback_query.answer("⚠️ Yᴏᴜ ʜᴀᴠᴇɴ'ᴛ ᴊᴏɪɴᴇᴅ ʏᴇᴛ! Pʟᴇᴀsᴇ ᴊᴏɪɴ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ.", show_alert=True)
-    except Exception:
-        await callback_query.answer("⚠️ Sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ! Pʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.", show_alert=True)
+#async def refresh_subscription(client, callback_query: CallbackQuery):
+  #  update_channel = CHANNEL_ID
+  #  try:
+    #    user = await client.get_chat_member(update_channel, callback_query.from_user.id)
+     #   if user.status in ["member", "administrator", "creator"]:
+       #     await callback_query.message.delete()
+        #    await callback_query.message.reply_text("✅ **Tʜᴀɴᴋ ʏᴏᴜ ғᴏʀ ᴊᴏɪɴɪɴɢ ᴏᴜʀ ᴄʜᴀɴɴᴇʟ!**\n\n🎉 **Nᴏᴡ ʏᴏᴜ ᴄᴀɴ ꜱᴇɴᴅ ʏᴏᴜʀ ғɪʟᴇ & ʟɪɴᴋꜱ.**")
+      #  else:
+          #  await callback_query.answer("⚠️ Yᴏᴜ ʜᴀᴠᴇɴ'ᴛ ᴊᴏɪɴᴇᴅ ʏᴇᴛ! Pʟᴇᴀsᴇ ᴊᴏɪɴ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ.", show_alert=True)
+ #   except Exception:
+ #       await callback_query.answer("⚠️ Sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ! Pʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.", show_alert=True)
         
 async def get_seconds(time_string):
     def extract_value_and_unit(ts):
