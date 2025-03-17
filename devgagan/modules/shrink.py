@@ -77,7 +77,7 @@ async def token_handler(client, message):
     if msg and msg.photo:
         photo_id = msg.photo.file_id
     else:
-        photo_id = "https://i.ibb.co/yFbqM7V/photo-2025-03-17-05-48-38-7482651302506266628.jpg"  # ডিফল্ট ইমেজ URL
+        photo_id = "https://i.postimg.cc/SQVw7HCz/photo-2025-03-17-09-39-48-7482710873702662152.jpg"  # ডিফল্ট ইমেজ URL
     
     user_id = message.chat.id
     if len(message.command) <= 1:
