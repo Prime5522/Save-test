@@ -204,7 +204,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             if chat in saved_channel_ids:
                 await app.edit_message_text(
                     message.chat.id, edit_id,
-                    "Sorry! This channel is protected by **@MisterBrutal**."
+                    "Sorry! This channel is protected by **@Prime_Botz**."
                 )
                 return
             
@@ -225,7 +225,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             return
         
         else:
-            edit = await app.edit_message_text(sender, edit_id, "Public link detected...")
+            edit = await app.edit_message_text(sender, edit_id, "Public link detected...Prime Is Uploading Your File...")
             chat = msg_link.split("t.me/")[1].split("/")[0]
             msg_id = int(msg_link.split("/")[-1])
             await copy_message_with_chat_id(app, userbot, sender, chat, msg_id, edit)
@@ -583,7 +583,7 @@ user_caption_preferences = {}
 async def set_rename_command(user_id, custom_rename_tag):
     user_rename_preferences[str(user_id)] = custom_rename_tag
 
-get_user_rename_preference = lambda user_id: user_rename_preferences.get(str(user_id), '@MisterBrutal')
+get_user_rename_preference = lambda user_id: user_rename_preferences.get(str(user_id), '@Prime_Botz')
 
 async def set_caption_command(user_id, custom_caption):
     user_caption_preferences[str(user_id)] = custom_caption
@@ -665,7 +665,7 @@ async def callback_query_handler(event):
         await event.respond('Please send the photo you want to set as the thumbnail.')
     
     elif event.data == b'pdfwt':
-        await event.respond("Watermark is Pro+ Plan.. contact @Ig_1Venom")
+        await event.respond("Watermark is Pro+ Plan.. contact @Prime_Bots_Support_RoBot")
         return
 
     elif event.data == b'uploadmethod':
@@ -891,7 +891,7 @@ async def handle_large_file(file, sender, edit, caption):
         if freecheck == 1:
             reply_markup = InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("💎 Get Premium to Forward", url="https://t.me/Ig_1Venom")]
+                    [InlineKeyboardButton("💎 Get Premium to Forward", url="https://t.me/Prime_Bots_Support_RoBot")]
                 ]
             )
             await app.copy_message(
