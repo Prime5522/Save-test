@@ -18,12 +18,15 @@ from config import OWNER_ID
 from devgagan.core.func import subscribe
 import asyncio
 from devgagan.core.func import *
-from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import (
+    CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, 
+    BotCommand, InputMediaPhoto  # ✅ নতুন Import করা হয়েছে
+)
 from pyrogram.raw.functions.bots import SetBotInfo
 from pyrogram.raw.types import InputUserSelf
 
-from pyrogram.types import BotCommand, InlineKeyboardButton, InlineKeyboardMarkup
- 
+QR_IMAGE_URL = "https://i.ibb.co/dZN26Kx/photo-2024-09-23-02-57-05-7482607940516446216.jpg"
+
 @app.on_message(filters.command("set"))
 async def set(_, message):
     if message.from_user.id not in OWNER_ID:
@@ -172,76 +175,58 @@ async def terms(client, message):
     buttons = InlineKeyboardMarkup(
         [
             [InlineKeyboardButton("Purchase Premium", callback_data="see_plan")],
-            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/Ig_1Venom")],
+            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/Prime_Bots_Support_RoBot")],
         ]
     )
     await message.reply_text(terms_text, reply_markup=buttons)
  
+
+PLAN_TEXT = (
+    """> **🎖️ ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴꜱ :**
+
+❏ 030₹ OR 1$   ➠    𝟶2 ᴡᴇᴇᴋꜱ
+❏ 𝟶50₹ OR 2$   ➠    𝟶𝟷 ᴍᴏɴᴛʜ
+❏ 140₹ OR 5$   ➠    𝟶𝟹 ᴍᴏɴᴛʜ
+
+**🆔 ᴜᴘɪ ɪᴅ ➩ ** `Misterbrutal@apl`
+
+**💰ᴘᴀʏᴘᴀʟ ➩ **` @Misterbrutal `
  
+**💲 Crypto And Amazon Gift Cards Are Also Accepted**
+ 
+**⛽️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ: /myplan**
+
+**‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.**
+**‼️ ɢɪᴠᴇ ᴜꜱ ꜱᴏᴍᴇ ᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴘʀᴇᴍɪᴜᴍ ʟɪꜱᴛ.**
+
+📜 **Terms And Conditions Applied**"""
+)
+
+BUTTONS = InlineKeyboardMarkup(
+    [
+        [InlineKeyboardButton("📜 See Terms", callback_data="see_terms")],
+        [InlineKeyboardButton("💬 Contact Admin", url="https://t.me/Prime_Bots_Support_RoBot")],
+    ]
+)
+
 @app.on_message(filters.command("plan") & filters.private)
 async def plan(client, message):
-    plan_text = (
-       """> **🎖️ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴꜱ :**
-
- ❏ 030₹ OR 1$   ➠    𝟶2 ᴡᴇᴇᴋꜱ
- ❏ 𝟶50₹ OR 2$   ➠    𝟶𝟷 ᴍᴏɴᴛʜ
- ❏ 140₹ OR 5$   ➠    𝟶𝟹 ᴍᴏɴᴛʜ
-
-**🆔 ᴜᴘɪ ɪᴅ ➩ ** `Misterbrutal@apl`
-
-**💰ᴘᴀʏᴘᴀʟ ➩ **` @Misterbrutal `
- 
-**💲Crpto And Amazon Gift Cards Are Also Accepted**
- 
-**⛽️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ: /myplan**
-
-**‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.**
-**‼️ ɢɪᴠᴇ ᴜꜱ ꜱᴏᴍᴇᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴘʀᴇᴍɪᴜᴍ ʟɪꜱᴛ.**
-
-     📜 **Terms And Conditions Applied**"""
+    await message.reply_photo(
+        photo=QR_IMAGE_URL,
+        caption=PLAN_TEXT,
+        reply_markup=BUTTONS
     )
-     
-    buttons = InlineKeyboardMarkup(
-        [
-            [InlineKeyboardButton("📜 See Terms", callback_data="see_terms")],
-            [InlineKeyboardButton("💬 Contact Admin", url="https://t.me/Ig_1Venom")],
-        ]
-    )
-    await message.reply_text(plan_text, reply_markup=buttons)
- 
- 
+
+
 @app.on_callback_query(filters.regex("see_plan"))
 async def see_plan(client, callback_query):
-    plan_text = (
-      """> **🎖️ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʀᴇᴍɪᴜᴍ ᴘʟᴀɴꜱ :**
-
- ❏ 030₹ OR 1$   ➠    𝟶2 ᴡᴇᴇᴋꜱ
- ❏ 𝟶50₹ OR 2$   ➠    𝟶𝟷 ᴍᴏɴᴛʜ
- ❏ 140₹ OR 5$   ➠    𝟶𝟹 ᴍᴏɴᴛʜ
-
-**🆔 ᴜᴘɪ ɪᴅ ➩ ** `Misterbrutal@apl`
-
-**💰ᴘᴀʏᴘᴀʟ ➩ **` @Misterbrutal `
- 
-**💲Crpto And Amazon Gift Cards Are Also Accepted**
- 
-**⛽️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ: /myplan**
-
-**‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.**
-**‼️ ɢɪᴠᴇ ᴜꜱ ꜱᴏᴍᴇᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴘʀᴇᴍɪᴜᴍ ʟɪꜱᴛ.**
-
-     📜 **Terms And Conditions Applied** """
-
-    )
-     
-    buttons = InlineKeyboardMarkup(
-        [
-            [InlineKeyboardButton("📜 See Terms", callback_data="see_terms")],
-            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/Ig_1Venom")],
-        ]
-    )
-    await callback_query.message.edit_text(plan_text, reply_markup=buttons)
- 
+    await callback_query.message.edit_media(
+        media=InputMediaPhoto(
+            media=QR_IMAGE_URL,
+            caption=PLAN_TEXT
+        ),
+        reply_markup=BUTTONS
+ )
  
 @app.on_callback_query(filters.regex("see_terms"))
 async def see_terms(client, callback_query):
@@ -257,7 +242,7 @@ async def see_terms(client, callback_query):
     buttons = InlineKeyboardMarkup(
         [
             [InlineKeyboardButton("Buy Premium", callback_data="see_plan")],
-            [InlineKeyboardButton("💬 Contact Admin", url="https://t.me/IG_1Venom")],
+            [InlineKeyboardButton("💬 Contact Admin", url="https://t.me/Prime_Bots_Support_RoBot")],
         ]
     )
     await callback_query.message.edit_text(terms_text, reply_markup=buttons)
