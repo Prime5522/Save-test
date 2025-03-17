@@ -229,7 +229,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             chat = msg_link.split("t.me/")[1].split("/")[0]
             msg_id = int(msg_link.split("/")[-1])
             await copy_message_with_chat_id(app, userbot, sender, chat, msg_id, edit)
-            await edit.delete(2)
+            await edit.delete(3)
             return
             
         # Fetch the target message
