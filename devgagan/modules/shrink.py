@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, Message
-from pyrogram.errors import UserNotParticipant
+from pyrogram.errors import *
 import random
 import requests
 import string
