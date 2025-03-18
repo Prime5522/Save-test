@@ -62,6 +62,8 @@ async def is_user_verified(user_id):
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
     user_id = message.from_user.id
+    AUTH_CHANNEL = ["Prime_Botz"]
+
     subscribed = await is_subscribed(client, user_id, AUTH_CHANNEL)
 
     if not subscribed:
@@ -84,17 +86,16 @@ async def start_command(client, message):
         )
         return  # ✅ ফোর্স সাবস্ক্রিপশন ব্যতীত আর কিছুই চলবে না
 
-    # ✅ ইউজার যদি সব চ্যানেলে জয়েন করে থাকে তাহলে বাকি প্রসেস চলবে
-    chat_id = "Prime_Botz"
-    msg = await client.get_messages(chat_id, 42)
-
+    # ✅ ইউজার যদি সব চ্যানেলে জয়েন করে থাকে তাহলে স্টার্ট মেসেজ পাঠাবে
     image_url = "https://i.postimg.cc/SQVw7HCz/photo-2025-03-17-09-39-48-7482710873702662152.jpg"
-    join_button = InlineKeyboardButton("Join Channel", url="https://t.me/Prime_Botz")
-    premium = InlineKeyboardButton("Get Premium", url="https://t.me/Ig_1Venom")
-
+    
     keyboard = InlineKeyboardMarkup([
-        [join_button],
-        [premium]
+        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support"), 
+         InlineKeyboardButton("〄 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ 〄", url="https://t.me/Prime_Movies4U")],
+        [InlineKeyboardButton("〆 ʜᴇʟᴘ 〆", callback_data="help"), 
+         InlineKeyboardButton("〆 ᴀʙᴏᴜᴛ 〆", callback_data="about")],
+        [InlineKeyboardButton("〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄", url="https://t.me/Prime_Botz")],
+        [InlineKeyboardButton("✧ ᴄʀᴇᴀᴛᴏʀ ✧", url="https://t.me/Prime_Nayem")]
     ])
 
     await message.reply_photo(
@@ -107,7 +108,59 @@ async def start_command(client, message):
         ),
         reply_markup=keyboard
     )
-    return  # ✅ সব ঠিক থাকলে বাকি মেসেজ চলবে
+
+# ✅ হেল্প বাটন ফাংশন
+
+@app.on_callback_query(filters.regex("help"))
+async def help_callback(client, callback_query):
+    help_text = """📝 **Read Bot Commands & Features:**
+
+This is a very Powerful And Advanced Content Saver Bot
+
+Using This Bot Can You Save Content from The Private Or Public Channels and Groups Where Copying and Forwarding Is off.
+
+→ For Public Channels You Can Just Send Me The link.
+
+→ But for Private Channels You'll Have to Login Your Telegram Account(Make Sure to Logout from The Bot After Your Job is Done)
+
+1. /batch - Bulk extraction for posts (After login)
+2. /cancel - Cancel ongoing batch process
+3. /login - Log into the bot for private channel access
+4. /logout - Logout from the bot
+5. /myplan - Get details about your plans
+6. /plan - Check premium plans
+7. /transfer userID - Transfer premium to your beloved major purpose for resellers (Premium members only)
+8. /session - Generate Pyrogram V2 session
+9. /terms - Terms and conditions
+10. /speedtest - Test the server speed (not available in v3)
+11. /settings - Manage various settings
+
+You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
+
+    keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
+        [InlineKeyboardButton("⬅️ Back to Home", url="https://t.me/Save_Restricted_Content_PrimeBot?start=start")]
+    ])
+
+    await callback_query.message.edit_text(help_text, reply_markup=keyboard)
+
+ 
+# ✅ এবাউট বাটন ফাংশন
+@app.on_callback_query(filters.regex("about"))
+async def about_callback(client, callback_query): 
+    about_text = """<b><blockquote>⍟───[  <a href='https://t.me/Prime_Botz'>MY ᴅᴇᴛᴀɪʟꜱ ʙy ᴘʀɪᴍᴇ ʙᴏᴛz 🔥</a ]───⍟</blockquote>
+    
+‣ ᴍʏ ɴᴀᴍᴇ : <a href=https://t.me/Save_Restricted_Content_PrimeBot>ꜱᴀᴠᴇ ʀᴇꜱᴛʀɪᴄᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ ʙᴏᴛ</a>
+‣ ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ : <a href='tg://settings'>ᴛʜɪs ᴘᴇʀsᴏɴ</a> 
+‣ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/Prime_Nayem'>ᴍʀ.ᴘʀɪᴍᴇ</a> 
+‣ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ : <a href='https://t.me/Prime_Botz'>ᴘʀɪᴍᴇ ʙᴏᴛᴢ</a> 
+‣ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href='https://t.me/Prime_Movies4U'>ᴘʀɪᴍᴇ ᴍᴏᴠɪᴇs</a> 
+‣ ѕᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : <a href='https://t.me/Prime_Botz_Support'>ᴘʀɪᴍᴇ ʙᴏᴛᴢ ѕᴜᴘᴘᴏʀᴛ</a> 
+‣ ᴅᴀᴛᴀ ʙᴀsᴇ : <a href='https://www.mongodb.com/'>ᴍᴏɴɢᴏ ᴅʙ</a> 
+‣ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href='https://heroku.com'>ʜᴇʀᴏᴋᴜ</a> 
+‣ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : ᴠ2.7.1 [sᴛᴀʙʟᴇ]</b>"""
+
+    await callback_query.message.edit_text(about_text, disable_web_page_preview=True) # ✅ সব ঠিক থাকলে বাকি মেসেজ চলবে
 
 # ✅ রিফ্রেশ বাটনের ফাংশন
 @app.on_callback_query(filters.regex("refresh_check"))  
