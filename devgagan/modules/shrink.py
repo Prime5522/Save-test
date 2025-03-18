@@ -148,20 +148,19 @@ You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
 # ✅ এবাউট বাটন ফাংশন
 @app.on_callback_query(filters.regex("about"))
 async def about_callback(client, callback_query): 
-    about_text = """<b><blockquote>⍟───[  <a href='https://t.me/Prime_Botz'>MY ᴅᴇᴛᴀɪʟꜱ ʙy ᴘʀɪᴍᴇ ʙᴏᴛz 🔥</a ]───⍟</blockquote>
-    
-‣ ᴍʏ ɴᴀᴍᴇ : <a href=https://t.me/Save_Restricted_Content_PrimeBot>ꜱᴀᴠᴇ ʀᴇꜱᴛʀɪᴄᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ ʙᴏᴛ</a>
-‣ ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ : <a href='tg://settings'>ᴛʜɪs ᴘᴇʀsᴏɴ</a> 
-‣ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/Prime_Nayem'>ᴍʀ.ᴘʀɪᴍᴇ</a> 
-‣ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ : <a href='https://t.me/Prime_Botz'>ᴘʀɪᴍᴇ ʙᴏᴛᴢ</a> 
-‣ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href='https://t.me/Prime_Movies4U'>ᴘʀɪᴍᴇ ᴍᴏᴠɪᴇs</a> 
-‣ ѕᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : <a href='https://t.me/Prime_Botz_Support'>ᴘʀɪᴍᴇ ʙᴏᴛᴢ ѕᴜᴘᴘᴏʀᴛ</a> 
-‣ ᴅᴀᴛᴀ ʙᴀsᴇ : <a href='https://www.mongodb.com/'>ᴍᴏɴɢᴏ ᴅʙ</a> 
-‣ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href='https://heroku.com'>ʜᴇʀᴏᴋᴜ</a> 
-‣ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : ᴠ2.7.1 [sᴛᴀʙʟᴇ]</b>"""
+    about_text = """<b>──[ <a href="https://t.me/Prime_Botz">MY DETAILS BY PRIME BOTZ 🔥</a> ]──</b>
 
-    await callback_query.message.edit_text(about_text, disable_web_page_preview=True) # ✅ সব ঠিক থাকলে বাকি মেসেজ চলবে
+▸ ᴍʏ ɴᴀᴍᴇ : <a href="https://t.me/Save_Restricted_Content_PrimeBot">SAVE RESTRICTED CONTENT BOT</a>
+▸ ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ : <a href="tg://settings">ᴛʜɪs ᴘᴇʀsᴏɴ</a>
+▸ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href="https://t.me/Prime_Nayem">ᴍʀ.ᴘʀɪᴍᴇ</a>
+▸ ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ : <a href="https://t.me/Prime_Botz">ᴘʀɪᴍᴇ ʙᴏᴛᴢ</a>
+▸ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href="https://t.me/Prime_Movies4U">ᴘʀɪᴍᴇ ᴍᴏᴠɪᴇs</a>
+▸ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : <a href="https://t.me/Prime_Botz_Support">ᴘʀɪᴍᴇ ʙᴏᴛᴢ sᴜᴘᴘᴏʀᴛ</a>
+▸ ᴅᴀᴛᴀ ʙᴀsᴇ : <a href="https://www.mongodb.com">ᴍᴏɴɢᴏ ᴅʙ</a>
+▸ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href="https://heroku.com">ʜᴇʀᴏᴋᴜ</a>
+▸ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : v2.7.1 [sᴛᴀʙʟᴇ]"""
 
+await message.reply_text(text, parse_mode="HTML", disable_web_page_preview=True)
 # ✅ রিফ্রেশ বাটনের ফাংশন
 @app.on_callback_query(filters.regex("refresh_check"))  
 async def refresh_callback(client: Client, query: CallbackQuery):  
