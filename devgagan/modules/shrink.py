@@ -105,24 +105,24 @@ async def token_handler(client, message):
     # ✅ Handle the /start command when user is subscribed
     join = await subscribe(client, message)
     if join == 1:
-        return  # ✅ Return added here if user is not subscribed
-    
+        return  # ✅ যদি ইউজার সাবস্ক্রাইব না করে, তাহলে কিছুই হবে না
+
     chat_id = "Prime_Botz"
     msg = await client.get_messages(chat_id, 42)
-    
+
     user_id = message.chat.id
     if len(message.command) <= 1:
-        image_url = "https://envs.sh/Fgv.jpg"
+        image_url = "https://i.postimg.cc/SQVw7HCz/photo-2025-03-17-09-39-48-7482710873702662152.jpg"
         join_button = InlineKeyboardButton("Join Channel", url="https://t.me/Prime_Botz")
         premium = InlineKeyboardButton("Get Premium", url="https://t.me/Ig_1Venom")
-        
+
         keyboard = InlineKeyboardMarkup([
-            [join_button],   
-            [premium]    
+            [join_button],
+            [premium]
         ])
-        
+
         await message.reply_photo(
-            msg.photo.file_id,
+            image_url,  # ✅ সরাসরি URL ব্যবহার করা হয়েছে
             caption=(
                 "**Hi 👋 Welcome**\n\n"
                 "**✳️ I can save posts from Channels or Groups where forwarding is off.**\n"
@@ -130,7 +130,7 @@ async def token_handler(client, message):
                 "**✳️ For private channels, You'll Have To Login. Send /help to know more.**"
             ),
             reply_markup=keyboard
-        )
+)
         return  # ✅ Return added at the end to ensure proper flow
     param = message.command[1] if len(message.command) > 1 else None
     freecheck = await chk_user(message, user_id)
