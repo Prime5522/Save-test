@@ -14,7 +14,7 @@
 # ---------------------------------------------------
 
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import *
 import random
 import requests
@@ -83,9 +83,9 @@ async def token_handler(client, message):
             if btn:
                 username = (await client.get_me()).username
                 if len(message.command) > 1:
-                    btn.append([InlineKeyboardButton("♻️ Try Again ♻️", url=f"https://t.me/{username}?start={message.command[1]}")])
+                    btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
                 else:
-                    btn.append([InlineKeyboardButton("♻️ Try Again ♻️", url=f"https://t.me/{username}?start=true")])
+                    btn.append([InlineKeyboardButton("🔄 Refresh ♻️", callback_data="refresh_check")])
 
                 await message.reply_photo(
                     photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",  # Replace with your image link
@@ -185,3 +185,14 @@ async def smart_handler(client, message):
         )
         await message.reply("Click the button below to verify your free access token: \n\n> What will you get ? \n1. No time bound upto 20 hours \n2. Batch command limit will be FreeLimit + 20 \n3. All functions unlocked", reply_markup=button)
  
+
+@app.on_callback_query(filters.regex("refresh_check"))  
+async def refresh_callback(client: Client, query: CallbackQuery):  
+    user_id = query.from_user.id  
+    subscribed = await is_subscribed(client, user_id, AUTH_CHANNEL)  
+
+    if subscribed:  
+        await query.answer("✅ Thank you for joining! Now You Can Use Me if you face any problem then click to /help", show_alert=True)  
+    else:  
+        await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
+     
