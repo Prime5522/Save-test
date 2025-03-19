@@ -4,7 +4,7 @@ psutil
 aiofiles
 pillow
 devgagantools
-tgcrypto==1.2.1
+tgcrypto
 pyromod
 opencv-python-headless
 requests
