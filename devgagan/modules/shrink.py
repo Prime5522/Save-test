@@ -239,4 +239,5 @@ async def force_subscription_check(client, message):
     await sticker_msg.delete()
 
     # ✅ এখন স্বাভাবিক নিয়মে বট কাজ করবে
-    await app.process_message(message)
+    await app.invoke(message)
+    #await app.process_message(message)
