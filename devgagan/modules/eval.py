@@ -220,7 +220,7 @@ async def shellrunner(_, message):
     await message.stop_propagation()
 
 
-@app.on_message(filters.command("restart") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["restart"]) & filters.user(OWNER_ID))
 async def update(_, message):
     await message.reply("Restarting ... ")
     os.execl(sys.executable, sys.executable, "-m", "devgagan")
