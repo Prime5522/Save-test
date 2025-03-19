@@ -243,4 +243,6 @@ async def handle_link(client, message):
             ),
             reply_markup=InlineKeyboardMarkup(btn)
         )
-        return  
+        return 
+        await client.process_messages([message])
+     
