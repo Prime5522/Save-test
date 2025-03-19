@@ -38,7 +38,7 @@ async def send_msg(user_id, message):
         return 500, f"{user_id} : {traceback.format_exc()}\n"
 
 
-@app.on_message(filters.command("gcast") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["gcast"]) & filters.user(OWNER_ID))
 async def broadcast(_, message):
     if not message.reply_to_message:
         await message.reply_text("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴛᴏ ʙʀᴏᴀᴅᴄᴀsᴛ ɪᴛ.")
@@ -69,7 +69,7 @@ async def broadcast(_, message):
 
 
 
-@app.on_message(filters.command("acast") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["acast"]) & filters.user(OWNER_ID))
 async def announced(_, message):
     if message.reply_to_message:
       to_send=message.reply_to_message.id
