@@ -2,6 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, Message
 from pyrogram.errors import *
 import random
+import asyncio
 import requests
 import string
 import aiohttp
@@ -239,4 +240,9 @@ async def force_subscription_check(client, message):
     # ✅ ৩ সেকেন্ড অপেক্ষা করবে, তারপর স্টিকার ডিলিট হবে
     await asyncio.sleep(3)
     await sticker_msg.delete()
-    await client.send_message(message.chat.id, message.text)
+    try:
+    await app.send(message)
+except AttributeError:
+    pass  # এটি কোনো এফেক্ট ফেলবে না, শুধু এরর হ্যান্ডেল করবে
+except Exception as e:
+    print(f"Unexpected Error: {e}")
