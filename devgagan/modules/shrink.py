@@ -220,40 +220,27 @@ async def handle_link(client, message):
     # Check subscription
     subscribed = await is_subscribed(client, user_id, AUTH_CHANNELS)
 
-    if subscribed:
-        # If the user is already subscribed, send a sticker and then process the user's message
-        sticker = "CAACAgUAAxkBAAIz42faUvicn6_GS5uFP1jMsNO3hqknAAJMFgACJdWRVLSFBTAsBpJ5HgQ"
-        sent_sticker = await message.reply_sticker(sticker)
+    if not subscribed:
+        btn = []
+        for channel in AUTH_CHANNELS:
+            try:
+                chat = await client.get_chat(channel)
+                invite_link = chat.invite_link or await client.export_chat_invite_link(channel)
+                btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=invite_link)])
+            except Exception as e:
+                print(f"Error: {e}")
 
-        # Wait for 3 seconds
-        await asyncio.sleep(3)
+        btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
 
-        # Delete the sticker after 3 seconds
-        await sent_sticker.delete()
-
-        # Automatically call the same handler function to process the user's message again
-        await handle_link(client, message)  # Re-run the function with the same message
-        return  # Return to prevent further execution
-
-    # If not subscribed, show the subscription prompt
-    btn = []
-    for channel in AUTH_CHANNELS:
-        try:
-            chat = await client.get_chat(channel)
-            invite_link = chat.invite_link or await client.export_chat_invite_link(channel)
-            btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=invite_link)])
-        except Exception as e:
-            print(f"Error: {e}")
-
-    btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
-
-    # ফোর্স সাবস্ক্রিপশন মেসেজ পাঠানো
-    await message.reply_photo(
-        photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
-        caption=(
-            f"<b>👋 Hello {message.from_user.mention},\n\n"
-            "You must join our updates channel first to proceed. "
-            "Click on \"✇ Join {chat.title} ✇\" button to join the channel."
-        ),
-        reply_markup=InlineKeyboardMarkup(btn)
- )
+        # Force subscription message
+        await message.reply_photo(
+            photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
+            caption=(
+                f"<b>👋 Hello {message.from_user.mention},\n\n"
+                "If you want to use me, you must first join our updates channel. "
+                "Click on \"✇ Join Our Updates Channel ✇\" button. Then click on the \"Request to Join\" button. "
+                "After joining, click on \"Refresh\" button.</b>"
+            ),
+            reply_markup=InlineKeyboardMarkup(btn)
+        )
+        return  
