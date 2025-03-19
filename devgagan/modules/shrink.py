@@ -239,4 +239,4 @@ async def force_subscription_check(client, message):
     # ✅ ৩ সেকেন্ড অপেক্ষা করবে, তারপর স্টিকার ডিলিট হবে
     await asyncio.sleep(3)
     await sticker_msg.delete()
-    await client.process_messages([message]) 
+    await app.send(message) 
