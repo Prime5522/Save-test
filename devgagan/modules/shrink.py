@@ -19,13 +19,17 @@ token = tdb["tokens"]
 async def is_subscribed(bot, user_id, channels):
     for channel in channels:
         try:
-            await bot.get_chat_member(channel, user_id)
+            chat_member = await bot.get_chat_member(channel, user_id)
+            if chat_member.status in ["kicked", "banned"]:
+                return False  # ✅ ব্যান থাকলে False রিটার্ন করবে
         except UserNotParticipant:
-            return False  # ✅ যদি একটিতেও না থাকে তাহলে False রিটার্ন করবে
-        except Exception:
-            return False  # ✅ অন্য কোনো সমস্যা হলে False রিটার্ন করবে
+            return False  # ✅ ইউজার যদি না থাকে তাহলে False রিটার্ন করবে
+        except ChatAdminRequired:
+            continue  # ✅ যদি বট অ্যাডমিন না হয়, তাহলে স্কিপ করবে
+        except Exception as e:
+            print(f"Error in checking subscription: {e}")  # ✅ লগ রাখা হবে
+            continue
     return True  # ✅ যদি সবগুলো চ্যানেলে জয়েন থাকে তাহলে True রিটার্ন করবে
-
 
 async def create_ttl_index():
     await token.create_index("expires_at", expireAfterSeconds=0)
@@ -62,19 +66,30 @@ async def is_user_verified(user_id):
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
     user_id = message.from_user.id
-    AUTH_CHANNEL = ["Prime_Botz"]
 
-    subscribed = await is_subscribed(client, user_id, AUTH_CHANNEL)
+    # Ensure AUTH_CHANNEL is a list
+    if isinstance(AUTH_CHANNEL, str):
+        AUTH_CHANNELS = [AUTH_CHANNEL]
+    else:
+        AUTH_CHANNELS = AUTH_CHANNEL
+
+    # Check subscription
+    subscribed = await is_subscribed(client, user_id, AUTH_CHANNELS)
 
     if not subscribed:
         btn = []
-        for channel in AUTH_CHANNEL:
-            chat = await client.get_chat(channel)
-            btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=chat.invite_link)])
+        for channel in AUTH_CHANNELS:
+            try:
+                chat = await client.get_chat(channel)
+                invite_link = chat.invite_link or await client.export_chat_invite_link(channel)
+                btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=invite_link)])
+            except Exception as e:
+                print(f"Error: {e}")
+
         btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
 
-        # ✅ বাধ্যতামূলক চ্যানেল জয়েন করতে বলবে
-        sent_msg = await message.reply_photo(
+        # Force subscription message
+        await message.reply_photo(
             photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
             caption=(
                 f"<b>👋 Hello {message.from_user.mention},\n\n"
@@ -84,9 +99,9 @@ async def start_command(client, message):
             ),
             reply_markup=InlineKeyboardMarkup(btn)
         )
-        return  # ✅ ফোর্স সাবস্ক্রিপশন ব্যতীত আর কিছুই চলবে না
+        return  
 
-    # ✅ ইউজার যদি সব চ্যানেলে জয়েন করে থাকে তাহলে স্টার্ট মেসেজ পাঠাবে
+    # If subscribed, send the start message
     image_url = "https://i.postimg.cc/SQVw7HCz/photo-2025-03-17-09-39-48-7482710873702662152.jpg"
     
     keyboard = InlineKeyboardMarkup([
@@ -108,7 +123,6 @@ async def start_command(client, message):
         ),
         reply_markup=keyboard
     )
-
 # ✅ হেল্প বাটন ফাংশন
 
 @app.on_callback_query(filters.regex("help"))
@@ -160,7 +174,7 @@ async def about_callback(client, callback_query):
 ▸ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href="https://heroku.com">ʜᴇʀᴏᴋᴜ</a>
 ▸ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : v2.7.1 [sᴛᴀʙʟᴇ]"""
 
-    await message.reply_text(
+    await query.message.reply_text(
     text=about_text, 
     parse_mode="HTML",
     disable_web_page_preview=True
