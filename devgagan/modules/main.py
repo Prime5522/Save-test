@@ -166,7 +166,7 @@ async def process_special_links(userbot, user_id, msg, link):
     await msg.edit_text("Invalid link...")
 
 
-@app.on_message(filters.command("batch") & filters.private)
+@app.on_message(filters.command(["batch"]) & filters.private)
 async def batch_link(_, message):
     join = await subscribe(_, message)
     if join == 1:
@@ -288,7 +288,7 @@ async def batch_link(_, message):
     finally:
         users_loop.pop(user_id, None)
 
-@app.on_message(filters.command("cancel"))
+@app.on_message(filters.command(["cancel"]))
 async def stop_batch(_, message):
     user_id = message.chat.id
 
