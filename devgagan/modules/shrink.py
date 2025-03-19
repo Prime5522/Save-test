@@ -206,7 +206,7 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
 # ✅ যেকোনো কমান্ড, টেক্সট, মিডিয়া পাঠানোর সময় ফোর্স চেক করবে
-LINK_PATTERN = r"(https?://\S+|t\.me/\S+|telegram\.me/\S+|bit\.ly/\S+|goo\.gl/\S+|mega\.nz/\S+|mediafire\.com/\S+|drive\.google\.com/\S+)"
+LINK_PATTERN = r"(https?://\S+|http://\S+|t\.me/\S+|telegram\.me/\S+|bit\.ly/\S+|goo\.gl/\S+|mega\.nz/\S+|mediafire\.com/\S+|drive\.google\.com/\S+)"
 
 @app.on_message(filters.regex(LINK_PATTERN) & filters.private)
 async def force_subscription_check(client, message):
@@ -221,7 +221,7 @@ async def force_subscription_check(client, message):
         btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
 
         # ✅ বাধ্যতামূলক চ্যানেল জয়েন করতে বলবে
-        sent_msg = await message.reply_photo(
+        await message.reply_photo(
             photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
             caption=(
                 f"👋 Hello {message.from_user.mention},\n\n"
@@ -233,12 +233,10 @@ async def force_subscription_check(client, message):
         )
         return  # ✅ ফোর্স সাবস্ক্রিপশন ব্যতীত আর কিছুই চলবে না
 
-    # ✅ ইউজার যদি চ্যানেলে জয়েন করে থাকে, তখনই স্টিকার পাঠানো হবে
+    # ✅ ইউজার যদি চ্যানেলে জয়েন করে থাকে, শুধুমাত্র তখনই স্টিকার পাঠানো হবে
     sticker_msg = await message.reply_sticker("CAACAgUAAxkBAAIz42faUvicn6_GS5uFP1jMsNO3hqknAAJMFgACJdWRVLSFBTAsBpJ5HgQ")
 
     # ✅ ৩ সেকেন্ড অপেক্ষা করবে, তারপর স্টিকার ডিলিট হবে
     await asyncio.sleep(3)
     await sticker_msg.delete()
-
-    # ✅ এখন স্বাভাবিক নিয়মে বট কাজ করবে
-    await app.process_message(message)
+    
