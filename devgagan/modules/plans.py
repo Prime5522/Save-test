@@ -24,7 +24,7 @@ from pyrogram import filters
 
 
 
-@app.on_message(filters.command("rem") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["rem"]) & filters.user(OWNER_ID))
 async def remove_premium(client, message):
     if len(message.command) == 2:
         user_id = int(message.command[1])  
@@ -45,7 +45,7 @@ async def remove_premium(client, message):
 
 
 
-@app.on_message(filters.command("myplan"))
+@app.on_message(filters.command(["myplan"]))
 async def myplan(client, message):
     user_id = message.from_user.id
     user = message.from_user.mention
@@ -71,7 +71,7 @@ async def myplan(client, message):
         
 
 
-@app.on_message(filters.command("check") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["check"]) & filters.user(OWNER_ID))
 async def get_premium(client, message):
     if len(message.command) == 2:
         user_id = int(message.command[1])
@@ -99,7 +99,7 @@ async def get_premium(client, message):
         await message.reply_text("ᴜꜱᴀɢᴇ : /check user_id")
 
 
-@app.on_message(filters.command("add") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["add"]) & filters.user(OWNER_ID))
 async def give_premium_cmd_handler(client, message):
     if len(message.command) == 4:
         time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
@@ -126,7 +126,7 @@ async def give_premium_cmd_handler(client, message):
         await message.reply_text("Usage : /add user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
 
 
-@app.on_message(filters.command("transfer"))
+@app.on_message(filters.command(["transfer"]))
 async def transfer_premium(client, message):
     if len(message.command) == 2:
         new_user_id = int(message.command[1])  # The user ID to whom premium is transferred
@@ -227,7 +227,7 @@ async def premium_remover():
     return removed_users, not_removed_users
 
 
-@app.on_message(filters.command("freez") & filters.user(OWNER_ID))
+@app.on_message(filters.command(["freez"]) & filters.user(OWNER_ID))
 async def refresh_users(_, message):
     removed_users, not_removed_users = await premium_remover()
     # Create a summary message
