@@ -206,8 +206,6 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         # ❌ যদি ইউজার জয়েন না করে থাকে, তাহলে পপ-আপ দেখাবে
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
-# ✅ যেকোনো কমান্ড, টেক্সট, মিডিয়া পাঠানোর সময় ফোর্স চেক করবে
-# ✅ লিংক পাঠানোর সময় ফোর্স সাবস্ক্রিপশন চেক করা
 @app.on_message(filters.text)
 async def handle_link(client, message):
     user_id = message.from_user.id
@@ -222,31 +220,29 @@ async def handle_link(client, message):
     # Check subscription
     subscribed = await is_subscribed(client, user_id, AUTH_CHANNELS)
 
-    if not subscribed:
-        btn = []
-        for channel in AUTH_CHANNELS:
-            try:
-                chat = await client.get_chat(channel)
-                invite_link = chat.invite_link or await client.export_chat_invite_link(channel)
-                btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=invite_link)])
-            except Exception as e:
-                print(f"Error: {e}")
+    if subscribed:
+        # If already subscribed, proceed with the normal process without sending a message
+        return  # No message or action here, just return
 
-        btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
+    # If not subscribed, show the subscription prompt
+    btn = []
+    for channel in AUTH_CHANNELS:
+        try:
+            chat = await client.get_chat(channel)
+            invite_link = chat.invite_link or await client.export_chat_invite_link(channel)
+            btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=invite_link)])
+        except Exception as e:
+            print(f"Error: {e}")
 
-        # ফোর্স সাবস্ক্রিপশন মেসেজ পাঠানো
-        await message.reply_photo(
-            photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
-            caption=(
-                f"<b>👋 Hello {message.from_user.mention},\n\n"
-                "You must join our updates channel first to proceed. "
-                "Click on \"✇ Join {chat.title} ✇\" button to join the channel."
-            ),
-            reply_markup=InlineKeyboardMarkup(btn)
-        )
-        return  
+    btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
 
-    # সাবস্ক্রাইব করা থাকলে, কোনো মেসেজ বা কাজ হবে না, সরাসরি কাজ চলবে (যেমন, লিংক প্রক্রিয়া)
-    # আপনি এখানে আপনার মূল কাজ করবেন, তবে এখানে কোন অতিরিক্ত মেসেজ পাঠানো হবে না।
-    # কোডটা এখানেই শেষ হবে
- 
+    # ফোর্স সাবস্ক্রিপশন মেসেজ পাঠানো
+    await message.reply_photo(
+        photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
+        caption=(
+            f"<b>👋 Hello {message.from_user.mention},\n\n"
+            "You must join our updates channel first to proceed. "
+            "Click on \"✇ Join {chat.title} ✇\" button to join the channel. Than Click on Refresh Button"
+        ),
+        reply_markup=InlineKeyboardMarkup(btn)
+ )
