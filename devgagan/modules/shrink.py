@@ -221,8 +221,19 @@ async def handle_link(client, message):
     subscribed = await is_subscribed(client, user_id, AUTH_CHANNELS)
 
     if subscribed:
-        # If already subscribed, proceed with the normal process without sending a message
-        return  # No message or action here, just return
+        # If the user is already subscribed, send a sticker and then process the user's message
+        sticker = "CAACAgUAAxkBAAIz42faUvicn6_GS5uFP1jMsNO3hqknAAJMFgACJdWRVLSFBTAsBpJ5HgQ"
+        sent_sticker = await message.reply_sticker(sticker)
+
+        # Wait for 3 seconds
+        await asyncio.sleep(3)
+
+        # Delete the sticker after 3 seconds
+        await sent_sticker.delete()
+
+        # Automatically call the same handler function to process the user's message again
+        await handle_link(client, message)  # Re-run the function with the same message
+        return  # Return to prevent further execution
 
     # If not subscribed, show the subscription prompt
     btn = []
@@ -242,7 +253,7 @@ async def handle_link(client, message):
         caption=(
             f"<b>👋 Hello {message.from_user.mention},\n\n"
             "You must join our updates channel first to proceed. "
-            "Click on \"✇ Join {chat.title} ✇\" button to join the channel. Than Click on Refresh Button"
+            "Click on \"✇ Join {chat.title} ✇\" button to join the channel."
         ),
         reply_markup=InlineKeyboardMarkup(btn)
  )
