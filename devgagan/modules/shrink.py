@@ -243,6 +243,9 @@ async def handle_link(client, message):
             ),
             reply_markup=InlineKeyboardMarkup(btn)
         )
-        return 
-        await client.process_messages([message])
-     
+    else:
+        # ইউজার যদি সাবস্ক্রাইব করে থাকে, তাহলে নিচের কোড চলবে
+        await message.reply_text(f"✅ {message.from_user.mention}, you are subscribed! Now processing your request...")
+
+        # এখানে তোমার মেসেজ প্রসেসিং ফাংশন যুক্ত করো
+        await process_message(client, message)  # ধরে নিচ্ছি 'process_message' নামে ফাংশন আছে
