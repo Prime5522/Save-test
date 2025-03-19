@@ -207,37 +207,3 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
 # ✅ যেকোনো কমান্ড, টেক্সট, মিডিয়া পাঠানোর সময় ফোর্স চেক করবে
-LINK_PATTERN = r"(https?://\S+|http://\S+|t\.me/\S+|telegram\.me/\S+|bit\.ly/\S+|goo\.gl/\S+|mega\.nz/\S+|mediafire\.com/\S+|drive\.google\.com/\S+)"
-
-@app.on_message(filters.regex(LINK_PATTERN) & filters.private)
-async def force_subscription_check(client, message):
-    user_id = message.from_user.id
-    subscribed = await is_subscribed(client, user_id, AUTH_CHANNEL)
-
-    if not subscribed:
-        btn = []
-        for channel in AUTH_CHANNEL:
-            chat = await client.get_chat(channel)
-            btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=chat.invite_link)])
-        btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
-
-        # ✅ বাধ্যতামূলক চ্যানেল জয়েন করতে বলবে
-        await message.reply_photo(
-            photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
-            caption=(
-                f"👋 Hello {message.from_user.mention},\n\n"
-                "If you want to send links, you must first join our updates channel. "
-                "Click on \"✇ Join Our Updates Channel ✇\" button. Then click on the \"Request to Join\" button. "
-                "After joining, click on \"Refresh\" button."
-            ),
-            reply_markup=InlineKeyboardMarkup(btn)
-        )
-        return  # ✅ ফোর্স সাবস্ক্রিপশন ব্যতীত আর কিছুই চলবে না
-
-    # ✅ ইউজার যদি চ্যানেলে জয়েন করে থাকে, শুধুমাত্র তখনই স্টিকার পাঠানো হবে
-    sticker_msg = await message.reply_sticker("CAACAgUAAxkBAAIz42faUvicn6_GS5uFP1jMsNO3hqknAAJMFgACJdWRVLSFBTAsBpJ5HgQ")
-
-    # ✅ ৩ সেকেন্ড অপেক্ষা করবে, তারপর স্টিকার ডিলিট হবে
-    await asyncio.sleep(3)
-    await sticker_msg.delete()
-    await message.reply(Message)
