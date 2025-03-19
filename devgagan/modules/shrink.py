@@ -206,7 +206,9 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
 # ✅ যেকোনো কমান্ড, টেক্সট, মিডিয়া পাঠানোর সময় ফোর্স চেক করবে
-@app.on_message(filters.text | filters.command | filters.media)
+LINK_PATTERN = r"(https?://\S+|t\.me/\S+|telegram\.me/\S+|bit\.ly/\S+|goo\.gl/\S+|mega\.nz/\S+|mediafire\.com/\S+|drive\.google\.com/\S+)"
+
+@app.on_message(filters.regex(LINK_PATTERN) & filters.private)
 async def force_subscription_check(client, message):
     user_id = message.from_user.id
     subscribed = await is_subscribed(client, user_id, AUTH_CHANNEL)
@@ -223,7 +225,7 @@ async def force_subscription_check(client, message):
             photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
             caption=(
                 f"👋 Hello {message.from_user.mention},\n\n"
-                "If you want to use me, you must first join our updates channel. "
+                "If you want to send links, you must first join our updates channel. "
                 "Click on \"✇ Join Our Updates Channel ✇\" button. Then click on the \"Request to Join\" button. "
                 "After joining, click on \"Refresh\" button."
             ),
@@ -239,5 +241,4 @@ async def force_subscription_check(client, message):
     await sticker_msg.delete()
 
     # ✅ এখন স্বাভাবিক নিয়মে বট কাজ করবে
-    await app.invoke(message)
-    #await app.process_message(message)
+    await app.process_message(message)
