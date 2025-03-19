@@ -242,9 +242,6 @@ async def force_subscription_check(client, message):
     # ✅ ৩ সেকেন্ড অপেক্ষা করবে, তারপর স্টিকার ডিলিট হবে
     await asyncio.sleep(3)
     await sticker_msg.delete()
+    await client.dispatch([message])  # Pyrogram ২.০+ এর জন্য
 
-    # ✅ ইরোর এভয়েড করার জন্য `try-except` দিয়ে `process_messages()` হ্যান্ডল করা হলো
-    try:
-        await client.process_messages([message])  # আগের মতোই রেখে দিলাম
-    except AttributeError:
-        pass  # ইরোর হলেও কিছু করবে না, লগেও কিছু আসবে না
+ 
