@@ -162,22 +162,24 @@ You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
 # ✅ এবাউট বাটন ফাংশন
 @app.on_callback_query(filters.regex("about"))
 async def about_callback(client, callback_query): 
-    about_text = """<b>──[ <a href="https://t.me/Prime_Botz">MY DETAILS BY PRIME BOTZ 🔥</a> ]──</b>
-
-▸ ᴍʏ ɴᴀᴍᴇ : <a href="https://t.me/Save_Restricted_Content_PrimeBot">SAVE RESTRICTED CONTENT BOT</a>
-▸ ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ : <a href="tg://settings">ᴛʜɪs ᴘᴇʀsᴏɴ</a>
-▸ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href="https://t.me/Prime_Nayem">ᴍʀ.ᴘʀɪᴍᴇ</a>
-▸ ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ : <a href="https://t.me/Prime_Botz">ᴘʀɪᴍᴇ ʙᴏᴛᴢ</a>
-▸ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href="https://t.me/Prime_Movies4U">ᴘʀɪᴍᴇ ᴍᴏᴠɪᴇs</a>
-▸ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : <a href="https://t.me/Prime_Botz_Support">ᴘʀɪᴍᴇ ʙᴏᴛᴢ sᴜᴘᴘᴏʀᴛ</a>
-▸ ᴅᴀᴛᴀ ʙᴀsᴇ : <a href="https://www.mongodb.com">ᴍᴏɴɢᴏ ᴅʙ</a>
-▸ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href="https://heroku.com">ʜᴇʀᴏᴋᴜ</a>
+    about_text = """❤️ ᴍʏ ᴅᴇᴛᴀɪʟꜱ ʙʏ ᴘʀɪᴍᴇ ʙᴏᴛᴢ 🔥
+▸ ᴍʏ ɴᴀᴍᴇ : @Save_Restricted_Content_PrimeBot  
+▸ ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ : @Prime_Botz
+▸ ᴅᴇᴠᴇʟᴏᴘᴇʀ : @Prime_Nayem    
+▸ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : @Prime_Movies4U  
+▸ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : @Prime_Botz_Support  
+▸ ᴅᴀᴛᴀ ʙᴀsᴇ : MongoDB  
+▸ ʙᴏᴛ sᴇʀᴠᴇʀ : Heroku  
 ▸ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : v2.7.1 [sᴛᴀʙʟᴇ]"""
 
-    await callback_query.message.reply_text(
-        text=about_text, 
-        parse_mode="html",
-        disable_web_page_preview=True
+    keyboardn = InlineKeyboardMarkup([
+        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
+        [InlineKeyboardButton("⬅️ Back to Home", url="https://t.me/Save_Restricted_Content_PrimeBot?start=start")]
+    ])
+ 
+    await callback_query.message.edit_text(
+    about_text,
+    reply_markup=keyboardn
     )
 
 # ✅ রিফ্রেশ বাটনের ফাংশন
