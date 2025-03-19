@@ -222,14 +222,21 @@ async def force_subscription_check(client, message):
         sent_msg = await message.reply_photo(
             photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
             caption=(
-                f"<b>👋 Hello {message.from_user.mention},\n\n"
+                f"👋 Hello {message.from_user.mention},\n\n"
                 "If you want to use me, you must first join our updates channel. "
                 "Click on \"✇ Join Our Updates Channel ✇\" button. Then click on the \"Request to Join\" button. "
-                "After joining, click on \"Refresh\" button.</b>"
+                "After joining, click on \"Refresh\" button."
             ),
             reply_markup=InlineKeyboardMarkup(btn)
         )
         return  # ✅ ফোর্স সাবস্ক্রিপশন ব্যতীত আর কিছুই চলবে না
 
-    # ✅ ইউজার যদি চ্যানেলে জয়েন করে থাকে তাহলে বট তার স্বাভাবিক নিয়মে চলবে
+    # ✅ ইউজার যদি চ্যানেলে জয়েন করে থাকে, তখনই স্টিকার পাঠানো হবে
+    sticker_msg = await message.reply_sticker("CAACAgUAAxkBAAIz42faUvicn6_GS5uFP1jMsNO3hqknAAJMFgACJdWRVLSFBTAsBpJ5HgQ")
+
+    # ✅ ৩ সেকেন্ড অপেক্ষা করবে, তারপর স্টিকার ডিলিট হবে
+    await asyncio.sleep(3)
+    await sticker_msg.delete()
+
+    # ✅ এখন স্বাভাবিক নিয়মে বট কাজ করবে
     await app.process_message(message)
