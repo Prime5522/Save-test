@@ -176,7 +176,7 @@ async def about_callback(client, callback_query):
 
     await callback_query.message.reply_text(
         text=about_text, 
-        parse_mode="HTML",
+        parse_mode="html",
         disable_web_page_preview=True
     )
 
