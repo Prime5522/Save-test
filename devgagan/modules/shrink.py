@@ -174,11 +174,11 @@ async def about_callback(client, callback_query):
 ▸ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href="https://heroku.com">ʜᴇʀᴏᴋᴜ</a>
 ▸ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : v2.7.1 [sᴛᴀʙʟᴇ]"""
 
-    await query.message.reply_text(
-    text=about_text, 
-    parse_mode="HTML",
-    disable_web_page_preview=True
-)
+    await callback_query.message.reply_text(
+        text=about_text, 
+        parse_mode="HTML",
+        disable_web_page_preview=True
+    )
 
 # ✅ রিফ্রেশ বাটনের ফাংশন
 @app.on_callback_query(filters.regex("refresh_check"))  
