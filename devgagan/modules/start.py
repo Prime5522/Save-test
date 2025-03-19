@@ -205,7 +205,7 @@ PLAN_TEXT = (
  
 **⛽️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ: /myplan**
 
-🏷️ @Prime_Admin_Support_ProBot'
+🏷️ @Prime_Admin_Support_ProBot
 
 **‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.☝️**
 **‼️ ɢɪᴠᴇ ᴜꜱ ꜱᴏᴍᴇ ᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴘʀᴇᴍɪᴜᴍ ʟɪꜱᴛ.**
@@ -229,7 +229,7 @@ async def plan(client, message):
     )
 
 
-@app.on_callback_query(filters.regex(["see_plan"]))
+@app.on_callback_query(filters.regex("see_plan"))
 async def see_plan(client, callback_query):
     await callback_query.message.edit_media(
         media=InputMediaPhoto(
@@ -239,7 +239,7 @@ async def see_plan(client, callback_query):
         reply_markup=BUTTONS
  )
  
-@app.on_callback_query(filters.regex(["see_terms"]))
+@app.on_callback_query(filters.regex("see_terms"))
 async def see_terms(client, callback_query):
     terms_text = (
      "> 📜 **Terms and Conditions** 📜\n\n"
