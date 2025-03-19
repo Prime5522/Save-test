@@ -63,7 +63,7 @@ async def is_user_verified(user_id):
     return session is not None
  
 # ✅ স্টার্ট কমান্ড (ফোর্স সাবস্ক্রিপশন বাধ্যতামূলক)
-@app.on_message(filters.command("start"))
+@app.on_message(filters.command(["start"]))  # সঠিক
 async def start_command(client, message):
     user_id = message.from_user.id
 
@@ -114,15 +114,22 @@ async def start_command(client, message):
     ])
 
     await message.reply_photo(
-        image_url,
-        caption=(
-            "**Hi 👋 Welcome**\n\n"
-            "**✳️ I can save posts from Channels or Groups where forwarding is off.**\n"
-            "**✳️ Simply send the post link of a public channel.**\n"
-            "**✳️ For private channels, You'll Have To Login. Send /help to know more.**"
-        ),
-        reply_markup=keyboard
-    )
+    image_url,
+    caption=(
+        "🚀 **ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ꜱᴀᴠᴇ ʀᴇꜱᴛʀɪᴄᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ ᴘʀɪᴍᴇʙᴏᴛ!**\n\n"
+        "🔹 **ɪ ᴄᴀɴ ꜱᴀᴠᴇ ᴀɴᴅ ʀᴇᴛʀɪᴇᴠᴇ ᴘᴏꜱᴛꜱ** ꜰʀᴏᴍ ᴄʜᴀɴɴᴇʟꜱ ᴏʀ ɢʀᴏᴜᴘꜱ ᴡʜᴇʀᴇ ꜰᴏʀᴡᴀʀᴅɪɴɢ ɪꜱ ʀᴇꜱᴛʀɪᴄᴛᴇᴅ.\n"
+        "🔹 **ꜱɪᴍᴘʟʏ ꜱᴇɴᴅ ᴍᴇ ᴀ ᴘᴏꜱᴛ ʟɪɴᴋ** ꜰʀᴏᴍ ᴀɴʏ ᴘᴜʙʟɪᴄ ᴄʜᴀɴɴᴇʟ, ᴀɴᴅ ɪ'ʟʟ ᴘʀᴏᴠɪᴅᴇ ʏᴏᴜ ᴡɪᴛʜ ᴛʜᴇ ᴄᴏɴᴛᴇɴᴛ.\n"
+        "🔹 **ꜰᴏʀ ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀɴɴᴇʟꜱ**, ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ **ʟᴏɢ ɪɴ** ᴛᴏ ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴄᴄᴏᴜɴᴛ. (**/help** ᴛᴏ ʟᴇᴀʀɴ ᴍᴏʀᴇ)\n\n"
+        "🎯 **ᴡʜʏ ᴄʜᴏᴏꜱᴇ ᴍᴇ?**\n"
+        "✅ **ᴀᴅᴠᴀɴᴄᴇᴅ ᴘᴏꜱᴛ ꜱᴇᴀʀᴄʜɪɴɢ & ꜰɪʟᴛᴇʀɪɴɢ**\n"
+        "✅ **ᴡᴏʀᴋꜱ ꜰᴏʀ ʙᴏᴛʜ ᴘᴜʙʟɪᴄ & ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀɴɴᴇʟꜱ**\n"
+        "✅ **ꜰᴀꜱᴛ & ᴀᴄᴄᴜʀᴀᴛᴇ ʀᴇꜱᴜʟᴛꜱ**\n"
+        "✅ **ᴇᴀꜱʏ ᴛᴏ ᴜꜱᴇ**\n\n"
+        "🔗 **ꜱᴛᴀʀᴛ ʙʏ ꜱᴇɴᴅɪɴɢ ᴀ ᴘᴏꜱᴛ ʟɪɴᴋ ɴᴏᴡ!**\n\n"
+        "✨ **ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ:** **@PRIME_BOTZ 🔥**"
+    ),
+    reply_markup=keyboard
+ )
 # ✅ হেল্প বাটন ফাংশন
 
 @app.on_callback_query(filters.regex("help"))
@@ -174,7 +181,7 @@ async def about_callback(client, callback_query):
 
     keyboardn = InlineKeyboardMarkup([
         [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
-        [InlineKeyboardButton("⬅️ Back to Home", url="https://t.me/Save_Restricted_Content_PrimeBot?start=start")]
+        [InlineKeyboardButton("〆 ʜᴇʟᴘ 〆", callback_data="help")]
     ])
  
     await callback_query.message.edit_text(
@@ -192,7 +199,7 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         # ✅ যদি ইউজার চ্যানেলে জয়েন থাকে, তাহলে পুরাতন মেসেজ ডিলিট করে নতুন মেসেজ দেবে
         await query.message.delete()  
         await query.message.reply_text(
-            "✅ Thank you for joining! Now you can use me.\n\nIf you face any problem, type /help"
+            "✅ Thank You For Joining! Now You Can Use Me."
         )
     else:
         # ❌ যদি ইউজার জয়েন না করে থাকে, তাহলে পপ-আপ দেখাবে
