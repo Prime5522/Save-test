@@ -209,6 +209,7 @@ async def refresh_callback(client: Client, query: CallbackQuery):
 # ✅ যেকোনো কমান্ড, টেক্সট, মিডিয়া পাঠানোর সময় ফোর্স চেক করবে
 LINK_PATTERN = r"(https?://\S+|http://\S+|t\.me/\S+|telegram\.me/\S+|bit\.ly/\S+|goo\.gl/\S+|mega\.nz/\S+|mediafire\.com/\S+|drive\.google\.com/\S+)"
 
+
 # ✅ ফোর্স সাবস্ক্রিপশন চেক ফাংশন
 @app.on_message(filters.regex(LINK_PATTERN) & filters.private)
 async def force_subscription_check(client, message):
