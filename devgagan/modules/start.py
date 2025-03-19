@@ -133,7 +133,7 @@ async def send_or_edit_help_page(_, message, page_number):
     )
  
  
-@app.on_message(filters.command("help"))
+@app.on_message(filters.command(["help"]))
 async def help(client, message):
     join = await subscribe(client, message)
     if join == 1:
@@ -162,7 +162,7 @@ async def on_help_navigation(client, callback_query):
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
  
-@app.on_message(filters.command("terms") & filters.private)
+@app.on_message(filters.command(["terms"]) & filters.private)
 async def terms(client, message):
     terms_text = (
         "> 📜 **Terms and Conditions** 📜\n\n"
@@ -200,14 +200,14 @@ PLAN_TEXT = (
 ❏ 4 $ - 6 ᴍᴏɴᴛʜs
 ╰━━━━━━━━━━╯
 
-💵 𝗔𝗡𝗬 𝗖𝗢𝗨𝗡𝗧𝗥𝗬 𝗔𝗟𝗟 𝗣𝗔𝗬𝗠𝗘𝗡𝗧 𝗠𝗘𝗧𝗛𝗢𝗗 𝗔𝗩𝗔𝗜𝗟𝗔𝗕𝗟𝗘. যদি বিকাশ বা 𝗤𝗥 কোড ছাড়া অথবা অন্য কিছু মাধ্যমে\n পেমেন্ট করতে চাইলে অথবা আরো কিছু জানার থাকলে\n𝗖𝗢𝗡𝗡𝗘𝗖𝗧 𝗔𝗗𝗠𝗜𝗡 ➠ <a href=https://t.me/Prime_Admin_Support_ProBot >𝐌𝐑.𝐏𝐑𝐈𝐌𝐄</a> 
+💵 𝗔𝗡𝗬 𝗖𝗢𝗨𝗡𝗧𝗥𝗬 𝗔𝗟𝗟 𝗣𝗔𝗬𝗠𝗘𝗡𝗧 𝗠𝗘𝗧𝗛𝗢𝗗 𝗔𝗩𝗔𝗜𝗟𝗔𝗕𝗟𝗘. যদি বিকাশ বা 𝗤𝗥 কোড ছাড়া অথবা অন্য কিছু মাধ্যমে\n পেমেন্ট করতে চাইলে অথবা আরো কিছু জানার থাকলে\n𝗖𝗢𝗡𝗡𝗘𝗖𝗧 𝗔𝗗𝗠𝗜𝗡 ➠ @Prime_Admin_Support_ProBot
 
  
 **⛽️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ: /myplan**
 
-🏷️ <a href='https://t.me/Prime_Admin_Support_ProBot'>ᴘᴀʏᴍᴇɴᴛ ᴘʀᴏᴏꜰ</a>
+🏷️ @Prime_Admin_Support_ProBot'
 
-**‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.**
+**‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.☝️**
 **‼️ ɢɪᴠᴇ ᴜꜱ ꜱᴏᴍᴇ ᴛɪᴍᴇ ᴛᴏ ᴀᴅᴅ ʏᴏᴜ ɪɴ ᴘʀᴇᴍɪᴜᴍ ʟɪꜱᴛ.**
 
 📜 **Terms And Conditions Applied**"""
@@ -220,7 +220,7 @@ BUTTONS = InlineKeyboardMarkup(
     ]
 )
 
-@app.on_message(filters.command("plan") & filters.private)
+@app.on_message(filters.command(["plan"]) & filters.private)
 async def plan(client, message):
     await message.reply_photo(
         photo=QR_IMAGE_URL,
@@ -229,7 +229,7 @@ async def plan(client, message):
     )
 
 
-@app.on_callback_query(filters.regex("see_plan"))
+@app.on_callback_query(filters.regex(["see_plan"]))
 async def see_plan(client, callback_query):
     await callback_query.message.edit_media(
         media=InputMediaPhoto(
@@ -239,7 +239,7 @@ async def see_plan(client, callback_query):
         reply_markup=BUTTONS
  )
  
-@app.on_callback_query(filters.regex("see_terms"))
+@app.on_callback_query(filters.regex(["see_terms"]))
 async def see_terms(client, callback_query):
     terms_text = (
      "> 📜 **Terms and Conditions** 📜\n\n"
