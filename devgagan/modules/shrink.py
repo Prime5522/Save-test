@@ -248,5 +248,5 @@ async def force_sub_handler(client, message):
         )
         return  
 
-    await app.process(message)
+    await get_msg(message)
  
