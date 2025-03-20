@@ -206,12 +206,6 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         # ❌ যদি ইউজার জয়েন না করে থাকে, তাহলে পপ-আপ দেখাবে
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-import asyncio
-
-AUTH_CHANNEL = ["your_channel_id"]  # এখানে তোমার চ্যানেলের আইডি বসাও
-
 @app.on_message(filters.text)
 async def handle_link(client, message):
     user_id = message.from_user.id
