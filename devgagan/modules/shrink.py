@@ -251,5 +251,6 @@ async def force_sub_handler(client, message):
         )
         return  
 
-    await get_msg(message)
+  #  await get_msg(message)
+    await get_msg(userbot, sender, edit_id, msg_link, i, message)
  
