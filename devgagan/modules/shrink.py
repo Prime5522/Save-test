@@ -106,7 +106,7 @@ async def start_command(client, message):
         return  
 
     # If subscribed, send the start message
-    image_url = "https://i.postimg.cc/SQVw7HCz/photo-2025-03-17-09-39-48-7482710873702662152.jpg"
+    image_url = "https://i.ibb.co/Fb3dtYMF/photo-2025-03-20-12-41-28-7483870948664279044.jpg" #https://i.postimg.cc/SQVw7HCz/photo-2025-03-17-09-39-48-7482710873702662152.jpg
     
     keyboard = InlineKeyboardMarkup([
         [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support"), 
@@ -123,7 +123,7 @@ async def start_command(client, message):
         "🚀 **ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ꜱᴀᴠᴇ ʀᴇꜱᴛʀɪᴄᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ ᴘʀɪᴍᴇʙᴏᴛ!**\n\n"
         "🔹 **ɪ ᴄᴀɴ ꜱᴀᴠᴇ ᴀɴᴅ ʀᴇᴛʀɪᴇᴠᴇ ᴘᴏꜱᴛꜱ** ꜰʀᴏᴍ ᴄʜᴀɴɴᴇʟꜱ ᴏʀ ɢʀᴏᴜᴘꜱ ᴡʜᴇʀᴇ ꜰᴏʀᴡᴀʀᴅɪɴɢ ɪꜱ ʀᴇꜱᴛʀɪᴄᴛᴇᴅ.\n"
         "🔹 **ꜱɪᴍᴘʟʏ ꜱᴇɴᴅ ᴍᴇ ᴀ ᴘᴏꜱᴛ ʟɪɴᴋ** ꜰʀᴏᴍ ᴀɴʏ ᴘᴜʙʟɪᴄ ᴄʜᴀɴɴᴇʟ, ᴀɴᴅ ɪ'ʟʟ ᴘʀᴏᴠɪᴅᴇ ʏᴏᴜ ᴡɪᴛʜ ᴛʜᴇ ᴄᴏɴᴛᴇɴᴛ.\n"
-        "🔹 **ꜰᴏʀ ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀɴɴᴇʟꜱ**, ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ **ʟᴏɢ ɪɴ** ᴛᴏ ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴄᴄᴏᴜɴᴛ. (**/help** ᴛᴏ ʟᴇᴀʀɴ ᴍᴏʀᴇ)\n\n"
+        "🔹 **ꜰᴏʀ ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀɴɴᴇʟꜱ**, ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ **ʟᴏɢ ɪɴ** ᴛᴏ ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴄᴄᴏᴜɴᴛ. (**help** ᴛᴏ ʟᴇᴀʀɴ ᴍᴏʀᴇ)\n\n"
         "🎯 **ᴡʜʏ ᴄʜᴏᴏꜱᴇ ᴍᴇ?**\n"
         "✅ **ᴀᴅᴠᴀɴᴄᴇᴅ ᴘᴏꜱᴛ ꜱᴇᴀʀᴄʜɪɴɢ & ꜰɪʟᴛᴇʀɪɴɢ**\n"
         "✅ **ᴡᴏʀᴋꜱ ꜰᴏʀ ʙᴏᴛʜ ᴘᴜʙʟɪᴄ & ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀɴɴᴇʟꜱ**\n"
@@ -160,7 +160,8 @@ Using This Bot Can You Save Content from The Private Or Public Channels and Grou
 10. /speedtest - Test the server speed (not available in v3)
 11. /settings - Manage various settings
 
-You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
+You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings.
+If You Have Any Problems Using This Bot, Please Let Us Know In Our Support Group 👇"""
 
     keyboard = InlineKeyboardMarkup([
         [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
@@ -252,5 +253,5 @@ async def force_sub_handler(client, message):
         return  
 
   #  await get_msg(message)
-    await get_msg(userbot, sender, edit_id, msg_link, i, message)
+    await get_msg(sender, edit_id, msg_link, i, message)
  
