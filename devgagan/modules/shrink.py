@@ -158,8 +158,8 @@ Using This Bot Can You Save Content from The Private Or Public Channels and Grou
 8. /session - Generate Pyrogram V2 session
 9. /terms - Terms and conditions
 10. /speedtest - Test the server speed (not available in v3)
-11. /settings - You can set CUSTOM THUMBNAIL, SESSION-based login, etc from settings.
-If You Face Any Please than Let Us Know In Our Support Group"""
+11. /settings - Manage various settings.
+You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
 
     keyboard = InlineKeyboardMarkup([
         [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
