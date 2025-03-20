@@ -246,5 +246,5 @@ async def force_sub_handler(client, message):
         return  
 
     # যদি সাবস্ক্রাইব করা থাকে, তাহলে ইউজারের পাঠানো মেসেজ অন্য হ্যান্ডলারে যাবে
-    await app.process(message)
- 
+   # await app.process(message)
+    await client.send_message(message.chat.id, "✅ Your Request Has Been Processed Successfully! Please Wait A Moment.")
