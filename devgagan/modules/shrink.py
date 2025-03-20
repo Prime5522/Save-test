@@ -158,10 +158,8 @@ Using This Bot Can You Save Content from The Private Or Public Channels and Grou
 8. /session - Generate Pyrogram V2 session
 9. /terms - Terms and conditions
 10. /speedtest - Test the server speed (not available in v3)
-11. /settings - Manage various settings
-
-You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings.
-If You Have Any Problems Using This Bot, Please Let Us Know In Our Support Group 👇"""
+11. /settings - You can set CUSTOM THUMBNAIL, SESSION-based login, etc from settings.
+If You Face Any Please than Let Us Know In Our Support Group"""
 
     keyboard = InlineKeyboardMarkup([
         [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
@@ -211,47 +209,4 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
 
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-@app.on_message(filters.private)  # প্রাইভেট চ্যাটের সব মেসেজ হ্যান্ডল করবে
-async def force_sub_handler(client, message):
-    user_id = message.from_user.id
-
-    # Ensure AUTH_CHANNEL is a list
-    if isinstance(AUTH_CHANNEL, str):
-        AUTH_CHANNELS = [AUTH_CHANNEL]
-    else:
-        AUTH_CHANNELS = AUTH_CHANNEL
-
-    # Check subscription
-    subscribed = await is_subscribed(client, user_id, AUTH_CHANNELS)
-
-    if not subscribed:
-        btn = []
-        for channel in AUTH_CHANNELS:
-            try:
-                chat = await client.get_chat(channel)
-                invite_link = chat.invite_link or await client.export_chat_invite_link(channel)
-                btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=invite_link)])
-            except Exception as e:
-                print(f"Error: {e}")
-
-        btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
-
-        # Force subscription message
-        await message.reply_photo(
-            photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
-            caption=(
-                f"<b>👋 Hello {message.from_user.mention},\n\n"
-                "If you want to use me, you must first join our updates channel. "
-                "Click on \"✇ Join Our Updates Channel ✇\" button. Then click on the \"Request to Join\" button. "
-                "After joining, click on \"Refresh\" button.</b>"
-            ),
-            reply_markup=InlineKeyboardMarkup(btn)
-        )
-        return  
-
-  #  await get_msg(message)
-    await get_msg(sender, edit_id, msg_link, i, message)
- 
