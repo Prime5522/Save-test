@@ -82,7 +82,7 @@ async def single_link(_, message):
     # Check if user is already in a loop
     if users_loop.get(user_id, False):
         await message.reply(
-            "You already have an ongoing process. Please wait for it to finish or If you think there is a problem, it is not there already than cancel it with /cancel."
+            "You already have an ongoing process. Please wait for it to finish or If you think there is a problem, it is not there already than cancel With /cancel . যদি আপনার মনে হয় কোন সমস্যা হয়েছে একটারোতো কাজ চলছে না আগে থেকে তাহলে দয়া করে ক্লিক করুন /cancel"
         )
         return
 
