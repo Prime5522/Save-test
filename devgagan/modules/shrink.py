@@ -6,12 +6,15 @@ import asyncio
 import requests
 import string
 import aiohttp
-from devgagan import app
-from devgagan.core.func import *
 from datetime import datetime, timedelta
 from motor.motor_asyncio import AsyncIOMotorClient
 from config import MONGO_DB, WEBSITE_URL, AUTH_CHANNEL, AD_API, LOG_GROUP  
- 
+
+# Importing from devgagan module
+from devgagan import app
+from devgagan.core.func import *  
+from devgagan.core.get_func import get_msg  # Added get_msg function
+
 tclient = AsyncIOMotorClient(MONGO_DB)
 tdb = tclient["telegram_bot"]
 token = tdb["tokens"]
