@@ -184,19 +184,29 @@ async def upload_media(sender, target_chat_id, file, caption, edit, topic_id):
 
 async def get_msg(userbot, sender, edit_id, msg_link, i, message):
     try:
-        # Sanitize the message link
+        # স্টিকার পাঠানো
+        sticker = await app.send_sticker(message.chat.id, "CAACAgUAAxkBAAIz42faUvicn6_GS5uFP1jMsNO3hqknAAJMFgACJdWRVLSFBTAsBpJ5HgQ")  
+        
+        # ৩-৪ সেকেন্ড অপেক্ষা করা
+        await asyncio.sleep(3)
+        
+        # স্টিকার ডিলিট করা
+        await sticker.delete()
+        
+        # **মূল কাজ শুরু করা**
         msg_link = msg_link.split("?single")[0]
         chat, msg_id = None, None
         saved_channel_ids = load_saved_channel_ids()
         size_limit = 2 * 1024 * 1024 * 1024  # 1.99 GB size limit
         file = ''
         edit = ''
-        # Extract chat and message ID for valid Telegram links
+
+        # **Extract chat and message ID for valid Telegram links**
         if 't.me/c/' in msg_link or 't.me/b/' in msg_link:
             parts = msg_link.split("/")
             if 't.me/b/' in msg_link:
                 chat = parts[-2]
-                msg_id = int(parts[-1]) + i # fixed bot problem 
+                msg_id = int(parts[-1]) + i  
             else:
                 chat = int('-100' + parts[parts.index('c') + 1])
                 msg_id = int(parts[-1]) + i
@@ -208,15 +218,15 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                 )
                 return
             
-        elif '/s/' in msg_link: # fixed story typo
-            edit = await app.edit_message_text(sender, edit_id, "Story Link Dictected...")
+        elif '/s/' in msg_link:  
+            edit = await app.edit_message_text(sender, edit_id, "Story Link Detected...")
             if userbot is None:
                 await edit.edit("Login in bot save stories...")     
                 return
             parts = msg_link.split("/")
             chat = parts[3]
             
-            if chat.isdigit():   # this is for channel stories
+            if chat.isdigit():   
                 chat = f"-100{chat}"
             
             msg_id = int(parts[-1])
