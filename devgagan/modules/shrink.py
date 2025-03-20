@@ -206,6 +206,12 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         # ❌ যদি ইউজার জয়েন না করে থাকে, তাহলে পপ-আপ দেখাবে
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+import asyncio
+
+AUTH_CHANNEL = ["your_channel_id"]  # এখানে তোমার চ্যানেলের আইডি বসাও
+
 @app.on_message(filters.text)
 async def handle_link(client, message):
     user_id = message.from_user.id
@@ -247,5 +253,18 @@ async def handle_link(client, message):
         # ইউজার যদি সাবস্ক্রাইব করে থাকে, তাহলে নিচের কোড চলবে
         await message.reply_text(f"✅ {message.from_user.mention}, you are subscribed! Now processing your request...")
 
-        # এখানে তোমার মেসেজ প্রসেসিং ফাংশন যুক্ত করো
-        await process_message(client, message)  # ধরে নিচ্ছি 'process_message' নামে ফাংশন আছে
+        # এখানে মেসেজ প্রসেসিং ফাংশন কল করা হবে
+        await process_message(client, message)
+
+async def process_message(client, message):
+    # স্টিকার পাঠানো
+    sticker_message = await message.reply_sticker("CAACAgUAAxkBAAIz42faUvicn6_GS5uFP1jMsNO3hqknAAJMFgACJdWRVLSFBTAsBpJ5HgQ")
+    
+    # ৩ সেকেন্ড অপেক্ষা
+    await asyncio.sleep(3)
+
+    # স্টিকার ডিলিট করা
+    await sticker_message.delete()
+
+    # এখানে তোমার মূল প্রসেসিং কোড যুক্ত করো
+    await message.reply_text("✅ Your request has been processed successfully!")
