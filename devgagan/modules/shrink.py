@@ -206,3 +206,45 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         # ❌ যদি ইউজার জয়েন না করে থাকে, তাহলে পপ-আপ দেখাবে
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
+
+@app.on_message(filters.private)  # প্রাইভেট চ্যাটের সব মেসেজ হ্যান্ডল করবে
+async def force_sub_handler(client, message):
+    user_id = message.from_user.id
+
+    # Ensure AUTH_CHANNEL is a list
+    if isinstance(AUTH_CHANNEL, str):
+        AUTH_CHANNELS = [AUTH_CHANNEL]
+    else:
+        AUTH_CHANNELS = AUTH_CHANNEL
+
+    # Check subscription
+    subscribed = await is_subscribed(client, user_id, AUTH_CHANNELS)
+
+    if not subscribed:
+        btn = []
+        for channel in AUTH_CHANNELS:
+            try:
+                chat = await client.get_chat(channel)
+                invite_link = chat.invite_link or await client.export_chat_invite_link(channel)
+                btn.append([InlineKeyboardButton(f"✇ Join {chat.title} ✇", url=invite_link)])
+            except Exception as e:
+                print(f"Error: {e}")
+
+        btn.append([InlineKeyboardButton("🔄 Refresh", callback_data="refresh_check")])
+
+        # Force subscription message
+        await message.reply_photo(
+            photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
+            caption=(
+                f"<b>👋 Hello {message.from_user.mention},\n\n"
+                "If you want to use me, you must first join our updates channel. "
+                "Click on \"✇ Join Our Updates Channel ✇\" button. Then click on the \"Request to Join\" button. "
+                "After joining, click on \"Refresh\" button.</b>"
+            ),
+            reply_markup=InlineKeyboardMarkup(btn)
+        )
+        return  
+
+    # যদি সাবস্ক্রাইব করা থাকে, তাহলে ইউজারের পাঠানো মেসেজ অন্য হ্যান্ডলারে যাবে
+    await app.process(message)
+ 
