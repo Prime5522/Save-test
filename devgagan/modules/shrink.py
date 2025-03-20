@@ -207,6 +207,9 @@ async def refresh_callback(client: Client, query: CallbackQuery):
         await query.answer("❌ You have not joined yet. Please join first, then refresh.", show_alert=True)
 
 
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 @app.on_message(filters.private)  # প্রাইভেট চ্যাটের সব মেসেজ হ্যান্ডল করবে
 async def force_sub_handler(client, message):
     user_id = message.from_user.id
@@ -243,4 +246,7 @@ async def force_sub_handler(client, message):
             ),
             reply_markup=InlineKeyboardMarkup(btn)
         )
-        
+        return  
+
+    await app.process(message)
+ 
