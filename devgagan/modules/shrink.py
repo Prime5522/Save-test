@@ -192,7 +192,7 @@ async def about_callback(client, callback_query):
     await callback_query.message.edit_text(
         about_text,
         reply_markup=keyboardn,
-        parse_mode="markdown"
+        parse_mode="Markdown"
     )
 
 # ✅ রিফ্রেশ বাটনের ফাংশন
