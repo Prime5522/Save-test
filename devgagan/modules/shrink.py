@@ -171,28 +171,28 @@ You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
  
 # ✅ এবাউট বাটন ফাংশন
 @app.on_callback_query(filters.regex("about"))
-async def about_callback(client, callback_query):
-    about_text = """<b><blockquote>⍟───[  <a href='https://t.me/PrimeXBots'>MY ᴅᴇᴛᴀɪʟꜱ ʙy ᴘʀɪᴍᴇXʙᴏᴛs</a> ]───⍟</blockquote>
+async def about_callback(client, callback_query): 
+    about_text = """**⍟───[ [ᴍy ᴅᴇᴛᴀɪʟꜱ ʙy ᴘʀɪᴍᴇXʙᴏᴛs](https://t.me/PrimeXBots) ]───⍟**
 
-‣ ᴍʏ ɴᴀᴍᴇ : <a href='https://t.me/Save_Restricted_Content_PrimeBot'>@Save_Restricted_Content_PrimeBot</a>  
-‣ ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ : <a href='tg://settings'>ᴛʜɪs ᴘᴇʀsᴏɴ</a>  
-‣ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/Prime_Nayem'>ᴍʀ.ᴘʀɪᴍᴇ</a>  
-‣ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ : <a href='https://t.me/PrimeXBots'>ᴘʀɪᴍᴇXʙᴏᴛꜱ</a>  
-‣ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href='https://t.me/PrimeCineZone'>Pʀɪᴍᴇ Cɪɴᴇᴢᴏɴᴇ</a>  
-‣ ѕᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : <a href='https://t.me/Prime_Support_group'>ᴘʀɪᴍᴇ X ѕᴜᴘᴘᴏʀᴛ</a>  
-‣ ᴅᴀᴛᴀ ʙᴀsᴇ : <a href='https://www.mongodb.com/'>ᴍᴏɴɢᴏ ᴅʙ</a>  
-‣ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href='https://heroku.com'>ʜᴇʀᴏᴋᴜ</a>  
-‣ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : ᴠ2.7.1 [sᴛᴀʙʟᴇ]</b>"""
+‣ **ᴍʏ ɴᴀᴍᴇ** : [@Save_Restricted_Content_PrimeBot](https://t.me/Save_Restricted_Content_PrimeBot)  
+‣ **ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ** : [ᴛʜɪs ᴘᴇʀsᴏɴ](tg://settings)  
+‣ **ᴅᴇᴠᴇʟᴏᴘᴇʀ** : [ᴍʀ.ᴘʀɪᴍᴇ](https://t.me/Prime_Nayem)  
+‣ **ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ** : [ᴘʀɪᴍᴇXʙᴏᴛꜱ](https://t.me/PrimeXBots)  
+‣ **ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ** : [Pʀɪᴍᴇ Cɪɴᴇᴢᴏɴᴇ](https://t.me/PrimeCineZone)  
+‣ **ѕᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ** : [ᴘʀɪᴍᴇ X ѕᴜᴘᴘᴏʀᴛ](https://t.me/Prime_Support_group)  
+‣ **ᴅᴀᴛᴀ ʙᴀsᴇ** : [ᴍᴏɴɢᴏ ᴅʙ](https://www.mongodb.com/)  
+‣ **ʙᴏᴛ sᴇʀᴠᴇʀ** : [ʜᴇʀᴏᴋᴜ](https://heroku.com)  
+‣ **ʙᴜɪʟᴅ sᴛᴀᴛᴜs** : `ᴠ2.7.1 [sᴛᴀʙʟᴇ]`"""
 
     keyboardn = InlineKeyboardMarkup([
-        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Support_group")],
+        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
         [InlineKeyboardButton("〆 ʜᴇʟᴘ 〆", callback_data="help")]
     ])
-
+ 
     await callback_query.message.edit_text(
         about_text,
         reply_markup=keyboardn,
-        parse_mode="HTML"
+        parse_mode="markdown"
     )
 
 # ✅ রিফ্রেশ বাটনের ফাংশন
