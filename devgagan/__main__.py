@@ -41,8 +41,7 @@ async def devggn_boot():
 📝 Description: A Pyrogram bot for downloading files from Telegram channels or groups 
                 and uploading them back to Telegram.
 👨‍💻 Author: MR.PRIME
-🌐 GitHub: https://github.com/PRIMEBOTZ/
-📬 Telegram: https://t.me/Prime_Botz
+📬 Telegram: https://t.me/PrimeXBots
 ▶️ YouTube: https://youtube.com
 🗓️ Created: 2025-01-11
 🔄 Last Modified: 2025-01-11
