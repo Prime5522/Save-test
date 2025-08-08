@@ -96,10 +96,10 @@ async def start_command(client, message):
         await message.reply_photo(
             photo="https://i.ibb.co/WvQdtkyB/photo-2025-03-01-11-42-50-7482697636613455884.jpg",
             caption=(
-                f"<b>👋 Hello {message.from_user.mention},\n\n"
+                f"👋 Hello {message.from_user.mention},\n\n"
                 "If you want to use me, you must first join our updates channel. "
                 "Click on \"✇ Join Our Updates Channel ✇\" button. Then click on the \"Request to Join\" button. "
-                "After joining, click on \"Refresh\" button.</b>"
+                "After joining, click on \"Refresh\" button."
             ),
             reply_markup=InlineKeyboardMarkup(btn)
         )
@@ -109,11 +109,11 @@ async def start_command(client, message):
     image_url = "https://i.ibb.co/Fb3dtYMF/photo-2025-03-20-12-41-28-7483870948664279044.jpg" #https://i.postimg.cc/SQVw7HCz/photo-2025-03-17-09-39-48-7482710873702662152.jpg
     
     keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support"), 
-         InlineKeyboardButton("〄 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ 〄", url="https://t.me/Prime_Movies4U")],
+        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Support_group"), 
+         InlineKeyboardButton("〄 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ 〄", url="https://t.me/PRIMECINEZONE")],
         [InlineKeyboardButton("〆 ʜᴇʟᴘ 〆", callback_data="help"), 
          InlineKeyboardButton("〆 ᴀʙᴏᴜᴛ 〆", callback_data="about")],
-        [InlineKeyboardButton("〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄", url="https://t.me/Prime_Botz")],
+        [InlineKeyboardButton("〄 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ 〄", url="https://t.me/PrimeXBots")],
         [InlineKeyboardButton("✧ ᴄʀᴇᴀᴛᴏʀ ✧", url="https://t.me/Prime_Nayem")]
     ])
 
@@ -130,7 +130,7 @@ async def start_command(client, message):
         "✅ **ꜰᴀꜱᴛ & ᴀᴄᴄᴜʀᴀᴛᴇ ʀᴇꜱᴜʟᴛꜱ**\n"
         "✅ **ᴇᴀꜱʏ ᴛᴏ ᴜꜱᴇ**\n\n"
         "🔗 **ꜱᴛᴀʀᴛ ʙʏ ꜱᴇɴᴅɪɴɢ ᴀ ᴘᴏꜱᴛ ʟɪɴᴋ ɴᴏᴡ!**\n\n"
-        "✨ **ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ:** **@PRIME_BOTZ 🔥**"
+        "✨ **ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ:** **@PrimeXBots 🔥**"
     ),
     reply_markup=keyboard
     )
@@ -162,7 +162,7 @@ Using This Bot Can You Save Content from The Private Or Public Channels and Grou
 You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
 
     keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
+        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Support_group")],
         [InlineKeyboardButton("⬅️ Back to Home", url="https://t.me/Save_Restricted_Content_PrimeBot?start=start")]
     ])
 
@@ -171,25 +171,28 @@ You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
  
 # ✅ এবাউট বাটন ফাংশন
 @app.on_callback_query(filters.regex("about"))
-async def about_callback(client, callback_query): 
-    about_text = """❤️ ᴍʏ ᴅᴇᴛᴀɪʟꜱ ʙʏ ᴘʀɪᴍᴇ ʙᴏᴛᴢ 🔥
-▸ ᴍʏ ɴᴀᴍᴇ : @Save_Restricted_Content_PrimeBot  
-▸ ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ : @Prime_Botz
-▸ ᴅᴇᴠᴇʟᴏᴘᴇʀ : @Prime_Nayem    
-▸ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : @Prime_Movies4U  
-▸ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : @Prime_Botz_Support  
-▸ ᴅᴀᴛᴀ ʙᴀsᴇ : MongoDB  
-▸ ʙᴏᴛ sᴇʀᴠᴇʀ : Heroku  
-▸ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : v2.7.1 [sᴛᴀʙʟᴇ]"""
+async def about_callback(client, callback_query):
+    about_text = """<b><blockquote>⍟───[  <a href='https://t.me/PrimeXBots'>MY ᴅᴇᴛᴀɪʟꜱ ʙy ᴘʀɪᴍᴇXʙᴏᴛs</a> ]───⍟</blockquote>
+
+‣ ᴍʏ ɴᴀᴍᴇ : <a href='https://t.me/Save_Restricted_Content_PrimeBot'>@Save_Restricted_Content_PrimeBot</a>  
+‣ ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ : <a href='tg://settings'>ᴛʜɪs ᴘᴇʀsᴏɴ</a>  
+‣ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/Prime_Nayem'>ᴍʀ.ᴘʀɪᴍᴇ</a>  
+‣ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ : <a href='https://t.me/PrimeXBots'>ᴘʀɪᴍᴇXʙᴏᴛꜱ</a>  
+‣ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href='https://t.me/PrimeCineZone'>Pʀɪᴍᴇ Cɪɴᴇᴢᴏɴᴇ</a>  
+‣ ѕᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ : <a href='https://t.me/Prime_Support_group'>ᴘʀɪᴍᴇ X ѕᴜᴘᴘᴏʀᴛ</a>  
+‣ ᴅᴀᴛᴀ ʙᴀsᴇ : <a href='https://www.mongodb.com/'>ᴍᴏɴɢᴏ ᴅʙ</a>  
+‣ ʙᴏᴛ sᴇʀᴠᴇʀ : <a href='https://heroku.com'>ʜᴇʀᴏᴋᴜ</a>  
+‣ ʙᴜɪʟᴅ sᴛᴀᴛᴜs : ᴠ2.7.1 [sᴛᴀʙʟᴇ]</b>"""
 
     keyboardn = InlineKeyboardMarkup([
-        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
+        [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Support_group")],
         [InlineKeyboardButton("〆 ʜᴇʟᴘ 〆", callback_data="help")]
     ])
- 
+
     await callback_query.message.edit_text(
-    about_text,
-    reply_markup=keyboardn
+        about_text,
+        reply_markup=keyboardn,
+        parse_mode="HTML"
     )
 
 # ✅ রিফ্রেশ বাটনের ফাংশন
