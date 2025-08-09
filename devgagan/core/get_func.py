@@ -214,7 +214,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             if chat in saved_channel_ids:
                 await app.edit_message_text(
                     message.chat.id, edit_id,
-                    "Sorry! This channel is protected by **@Prime_Botz**."
+                    "Sorry! This channel is protected by **@PrimeXBots**."
                 )
                 return
             
@@ -521,8 +521,25 @@ async def send_media_message(app, target_chat_id, msg, caption, topic_id):
     # Fallback to copy_message in case of any exceptions
     return await app.copy_message(target_chat_id, msg.chat.id, msg.id, reply_to_message_id=topic_id)
     
-
 def format_caption(original_caption, sender, custom_caption):
+    delete_words = load_delete_words(sender)
+    replacements = load_replacement_words(sender)
+
+    # Remove and replace words in the caption
+    for word in delete_words:
+        original_caption = original_caption.replace(word, '  ')
+    for word, replace_word in replacements.items():
+        original_caption = original_caption.replace(word, replace_word)
+
+    # Append custom caption if available
+    if custom_caption:
+        original_caption = f"{original_caption}\n\n__**{custom_caption}**__"
+
+    # Add fixed footer caption always at the end
+    footer = "\n\n⚡ ᴘᴏᴡᴇʀᴇᴅ ʙʏ: @PrimeXBots"
+    return original_caption + footer
+
+def format_caption_backup(original_caption, sender, custom_caption):
     delete_words = load_delete_words(sender)
     replacements = load_replacement_words(sender)
 
@@ -593,7 +610,7 @@ user_caption_preferences = {}
 async def set_rename_command(user_id, custom_rename_tag):
     user_rename_preferences[str(user_id)] = custom_rename_tag
 
-get_user_rename_preference = lambda user_id: user_rename_preferences.get(str(user_id), '@Prime_Botz')
+get_user_rename_preference = lambda user_id: user_rename_preferences.get(str(user_id), '@PrimeXBots')
 
 async def set_caption_command(user_id, custom_caption):
     user_caption_preferences[str(user_id)] = custom_caption
@@ -1026,7 +1043,7 @@ def progress_callback(done, total, user_id):
     # Format the final output as needed
     final = (
         f"╭──────────────────╮\n"
-        f"│     **__SpyLib ⚡ Uploader__**       \n"
+        f"│     **__@PrimeXBots ⚡ Uploader__**       \n"
         f"├──────────\n"
         f"│ {progress_bar}\n\n"
         f"│ **__Progress:__** {percent:.2f}%\n"
@@ -1088,7 +1105,7 @@ def dl_progress_callback(done, total, user_id):
     # Format the final output as needed
     final = (
         f"╭──────────────────╮\n"
-        f"│     **__SpyLib ⚡ Downloader__**       \n"
+        f"│     **__@PrimeXBots ⚡ Downloader__**       \n"
         f"├──────────\n"
         f"│ {progress_bar}\n\n"
         f"│ **__Progress:__** {percent:.2f}%\n"
