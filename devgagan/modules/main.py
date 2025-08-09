@@ -150,8 +150,24 @@ async def is_normal_tg_link(link: str) -> bool:
     """Check if the link is a standard Telegram link."""
     special_identifiers = ['t.me/+', 't.me/c/', 't.me/b/', 'tg://openmessage']
     return 't.me/' in link and not any(x in link for x in special_identifiers)
-    
+
 async def process_special_links(userbot, user_id, msg, link):
+    if userbot is None:
+        # শুধু বার্তাটি এডিট করুন, ডিলিট করবেন না
+        await msg.edit_text("Try logging in to the bot and try again.")
+        return
+    if 't.me/+' in link:
+        result = await userbot_join(userbot, link)
+        await msg.edit_text(result)
+        return
+    special_patterns = ['t.me/c/', 't.me/b/', '/s/', 'tg://openmessage']
+    if any(sub in link for sub in special_patterns):
+        await process_and_upload_link(userbot, user_id, msg.id, link, 0, msg)
+        await set_interval(user_id, interval_minutes=45)
+        return
+    await msg.edit_text("Invalid link...")
+    
+async def process_special_links_bacup(userbot, user_id, msg, link):
     if userbot is None:
         return await msg.edit_text("Try logging in to the bot and try again.")
     if 't.me/+' in link:
