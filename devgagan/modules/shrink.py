@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, Message
+from pyrogram import enums
 from pyrogram.errors import *
 import random
 import asyncio
@@ -172,17 +173,19 @@ You can set CUSTOM THUMBNAIL, SESSION-based login, etc. from settings."""
 # ✅ এবাউট বাটন ফাংশন
 @app.on_callback_query(filters.regex("about"))
 async def about_callback(client, callback_query): 
-    about_text = """**⍟───[ [ᴍy ᴅᴇᴛᴀɪʟꜱ ʙy ᴘʀɪᴍᴇXʙᴏᴛs](https://t.me/PrimeXBots) ]───⍟**
+    about_text = """
+<b>⍟───[ <a href="https://t.me/PrimeXBots">ᴍy ᴅᴇᴛᴀɪʟꜱ ʙy ᴘʀɪᴍᴇXʙᴏᴛs</a> ]───⍟</b>
 
-‣ **ᴍʏ ɴᴀᴍᴇ** : [@Save_Restricted_Content_PrimeBot](https://t.me/Save_Restricted_Content_PrimeBot)  
-‣ **ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ** : [ᴛʜɪs ᴘᴇʀsᴏɴ](tg://settings)  
-‣ **ᴅᴇᴠᴇʟᴏᴘᴇʀ** : [ᴍʀ.ᴘʀɪᴍᴇ](https://t.me/Prime_Nayem)  
-‣ **ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ** : [ᴘʀɪᴍᴇXʙᴏᴛꜱ](https://t.me/PrimeXBots)  
-‣ **ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ** : [Pʀɪᴍᴇ Cɪɴᴇᴢᴏɴᴇ](https://t.me/PrimeCineZone)  
-‣ **ѕᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ** : [ᴘʀɪᴍᴇ X ѕᴜᴘᴘᴏʀᴛ](https://t.me/Prime_Support_group)  
-‣ **ᴅᴀᴛᴀ ʙᴀsᴇ** : [ᴍᴏɴɢᴏ ᴅʙ](https://www.mongodb.com/)  
-‣ **ʙᴏᴛ sᴇʀᴠᴇʀ** : [ʜᴇʀᴏᴋᴜ](https://heroku.com)  
-‣ **ʙᴜɪʟᴅ sᴛᴀᴛᴜs** : `ᴠ2.7.1 [sᴛᴀʙʟᴇ]`"""
+‣ <b>ᴍʏ ɴᴀᴍᴇ</b> : <a href="https://t.me/Save_Restricted_Content_PrimeBot">@Save_Restricted_Content_PrimeBot</a>  
+‣ <b>ᴍʏ ʙᴇsᴛ ғʀɪᴇɴᴅ</b> : <a href="tg://settings">ᴛʜɪs ᴘᴇʀsᴏɴ</a>  
+‣ <b>ᴅᴇᴠᴇʟᴏᴘᴇʀ</b> : <a href="https://t.me/Prime_Nayem">ᴍʀ.ᴘʀɪᴍᴇ</a>  
+‣ <b>ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ</b> : <a href="https://t.me/PrimeXBots">ᴘʀɪᴍᴇXʙᴏᴛꜱ</a>  
+‣ <b>ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ</b> : <a href="https://t.me/PrimeCineZone">Pʀɪᴍᴇ Cɪɴᴇᴢᴏɴᴇ</a>  
+‣ <b>ѕᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ</b> : <a href="https://t.me/Prime_Support_group">ᴘʀɪᴍᴇ X ѕᴜᴘᴘᴏʀᴛ</a>  
+‣ <b>ᴅᴀᴛᴀ ʙᴀsᴇ</b> : <a href="https://www.mongodb.com/">ᴍᴏɴɢᴏ ᴅʙ</a>  
+‣ <b>ʙᴏᴛ sᴇʀᴠᴇʀ</b> : <a href="https://heroku.com">ʜᴇʀᴏᴋᴜ</a>  
+‣ <b>ʙᴜɪʟᴅ sᴛᴀᴛᴜs</b> : <code>ᴠ2.7.1 [sᴛᴀʙʟᴇ]</code>
+"""
 
     keyboardn = InlineKeyboardMarkup([
         [InlineKeyboardButton("✪ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ✪", url="https://t.me/Prime_Botz_Support")],
@@ -192,7 +195,7 @@ async def about_callback(client, callback_query):
     await callback_query.message.edit_text(
         about_text,
         reply_markup=keyboardn,
-        parse_mode="MarkdownV2"
+        parse_mode=enums.ParseMode.HTML
     )
 
 # ✅ রিফ্রেশ বাটনের ফাংশন
