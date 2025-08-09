@@ -128,4 +128,4 @@ async def generate_session(_, message):
     string_session = await client.export_session_string()
     await db.set_session(user_id, string_session)
     await client.disconnect()
-    await otp_code.reply("✅ Login successful!. Now You Can Use All Special Features. Bot Powered By @Prime_Botz")
+    await otp_code.reply("✅ Login successful!. Now You Can Use All Special Features. Bot Powered By @PrimeXBots")
